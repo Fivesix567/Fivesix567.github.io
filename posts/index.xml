@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Fivesix blog</title>
-    <link>http://localhost:1313/posts/</link>
+    <link>https://Fivesix567.github.io/posts/</link>
     <description>Recent content in Posts on Fivesix blog</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 29 Jan 2026 15:06:25 +0800</lastBuildDate>
-    <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 29 Jan 2026 19:26:27 +0800</lastBuildDate>
+    <atom:link href="https://Fivesix567.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>My First Post</title>
-      <link>http://localhost:1313/posts/2026/01/My-First-Post/</link>
+      <link>https://Fivesix567.github.io/posts/2026/01/My-First-Post/</link>
       <pubDate>Thu, 29 Jan 2026 12:56:06 +0800</pubDate>
-      <guid>http://localhost:1313/posts/2026/01/My-First-Post/</guid>
+      <guid>https://Fivesix567.github.io/posts/2026/01/My-First-Post/</guid>
       <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;a class=&#34;anchor&#34; href=&#34;#introduction&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;This is &lt;strong&gt;bold&lt;/strong&gt; text, and this is &lt;em&gt;emphasized&lt;/em&gt; text.&lt;/p&gt;&#xA;&lt;p&gt;Visit the &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; website!&lt;/p&gt;</description>
     </item>
   </channel>
