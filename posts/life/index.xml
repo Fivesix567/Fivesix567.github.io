@@ -2,10 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>生活随笔 on Fivesix blog</title>
-    <link>https://Fivesix567.github.io/posts/life/</link>
+    <link>http://localhost:1313/posts/life/</link>
     <description>Recent content in 生活随笔 on Fivesix blog</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
-    <atom:link href="https://Fivesix567.github.io/posts/life/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/posts/life/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>
