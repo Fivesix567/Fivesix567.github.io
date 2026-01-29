@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Fivesix blog</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Fivesix blog</description>
+    <generator>Hugo</generator>
+    <language>zh-CN</language>
+    <lastBuildDate>Thu, 29 Jan 2026 15:06:25 +0800</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>My First Post</title>
+      <link>http://localhost:1313/posts/2026/01/My-First-Post/</link>
+      <pubDate>Thu, 29 Jan 2026 12:56:06 +0800</pubDate>
+      <guid>http://localhost:1313/posts/2026/01/My-First-Post/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;a class=&#34;anchor&#34; href=&#34;#introduction&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;p&gt;This is &lt;strong&gt;bold&lt;/strong&gt; text, and this is &lt;em&gt;emphasized&lt;/em&gt; text.&lt;/p&gt;&#xA;&lt;p&gt;Visit the &lt;a href=&#34;https://gohugo.io&#34;&gt;Hugo&lt;/a&gt; website!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>关于我</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Mon, 29 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;h1 id=&#34;-你好&#34;&gt;👋 你好！&lt;a class=&#34;anchor&#34; href=&#34;#-%e4%bd%a0%e5%a5%bd&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;我是 [你的名字]，这是一段关于我的自我介绍。&lt;/p&gt;&#xA;&lt;h2 id=&#34;-技术栈&#34;&gt;🛠️ 技术栈&lt;a class=&#34;anchor&#34; href=&#34;#-%e6%8a%80%e6%9c%af%e6%a0%88&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;语言&lt;/strong&gt;: Python, Go, JavaScript&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;工具&lt;/strong&gt;: Docker, Kubernetes, Git&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;兴趣&lt;/strong&gt;: 开源, 写作, 摄影&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h2 id=&#34;-联系方式&#34;&gt;📫 联系方式&lt;a class=&#34;anchor&#34; href=&#34;#-%e8%81%94%e7%b3%bb%e6%96%b9%e5%bc%8f&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;strong&gt;Email&lt;/strong&gt;: &lt;a href=&#34;mailto:your.email@example.com&#34;&gt;your.email@example.com&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;strong&gt;GitHub&lt;/strong&gt;: &lt;a href=&#34;https://github.com/yourusername&#34;&gt;yourusername&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;hr&gt;&#xA;&lt;blockquote class=&#39;book-hint &#39;&gt;&#xA;&lt;p&gt;&amp;ldquo;Stay hungry, stay foolish.&amp;rdquo;&lt;/p&gt;&#xA;&lt;/blockquote&gt;</description>
+    </item>
+  </channel>
+</rss>
