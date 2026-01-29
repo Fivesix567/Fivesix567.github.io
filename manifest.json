@@ -1,6 +1,6 @@
 {
-  "name": "Fivesix blog",
-  "short_name": "Fivesix blog",
+  "name": "Fivesix's blog",
+  "short_name": "Fivesix's blog",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
