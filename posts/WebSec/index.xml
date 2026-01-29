@@ -6,14 +6,7 @@
     <description>Recent content in WebSec on Fivesix blog</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
-    <lastBuildDate>Thu, 29 Jan 2026 20:30:38 +0800</lastBuildDate>
+    <lastBuildDate></lastBuildDate>
     <atom:link href="http://localhost:1313/posts/WebSec/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>SqlInject</title>
-      <link>http://localhost:1313/posts/2026/01/SqlInject/</link>
-      <pubDate>Thu, 29 Jan 2026 20:30:38 +0800</pubDate>
-      <guid>http://localhost:1313/posts/2026/01/SqlInject/</guid>
-      <description>&lt;!-- 在这里开始写你的文章... --&gt;</description>
-    </item>
   </channel>
 </rss>
