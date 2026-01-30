@@ -36,7 +36,7 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
 CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native API (原生 API 层)# Kernel32.dll 中的 CreateFile 经过一系列检查后，会调用更底层的函数。这个函数位于 Ntdll.dll 中：">
   <meta itemprop="datePublished" content="2026-01-30T12:11:58+08:00">
   <meta itemprop="dateModified" content="2026-01-30T12:11:58+08:00">
-  <meta itemprop="wordCount" content="453">
+  <meta itemprop="wordCount" content="587">
 
 <title>Windows API 调用层级 | Fivesix&#39;s blog</title>
 <link rel="icon" href="/favicon.png" >
@@ -46,7 +46,7 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.cb86e0996beae7704345e536226c0293f4c5298bd70b095138e7f4bd2c256a69.js" integrity="sha256-y4bgmWvq53BDReU2ImwCk/TFKYvXCwlROOf0vSwlamk=" crossorigin="anonymous"></script>
+  <script defer src="/zh.search.min.1ae1ae9c594dbd6006df769b57275b1bd6f5a64fa8ea883e0b087a89e18c5918.js" integrity="sha256-GuGunFlNvWAG33abVydbG9b1pk&#43;o6og&#43;Cwh6ieGMWRg=" crossorigin="anonymous"></script>
 
 
 
@@ -377,6 +377,11 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
         <li><a href="#-跨越边界用户态-user-mode---内核态-kernel-mode-">====== 跨越边界：用户态 (User Mode) -&gt; 内核态 (Kernel Mode) ======</a></li>
         <li><a href="#第四层system-service-dispatcher-系统服务分发层">第四层：System Service Dispatcher (系统服务分发层)</a></li>
         <li><a href="#第五层kernel-executive-内核执行体层">第五层：Kernel Executive (内核执行体层)</a></li>
+        <li><a href="#visual-studio-调试fopen底层api">Visual Studio 调试fopen底层API</a>
+          <ul>
+            <li><a href="#配置-visual-studio-调试环境">配置 Visual Studio 调试环境</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -444,7 +449,49 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
 <p>CPU 切换到内核态后，会跳转到内核文件 ntoskrnl.exe 中的一个特定处理函数（通常是 KiSystemCall64 ）。它读取 EAX 中的号码（SSN），去查一张表—— SSDT (System Service Descriptor Table) ，根据号码找到对应的内核处理函数地址。</p>
 <h3 id="第五层kernel-executive-内核执行体层">第五层：Kernel Executive (内核执行体层)<a class="anchor" href="#%e7%ac%ac%e4%ba%94%e5%b1%82kernel-executive-%e5%86%85%e6%a0%b8%e6%89%a7%e8%a1%8c%e4%bd%93%e5%b1%82">#</a></h3>
 <p>SSDT 指向了真正的内核函数：</p>
-<pre tabindex="0"><code>NtCreateFile(...); // 位于 ntoskrnl.exe，名字和 Ntdll 里的一样，但代码完全不同</code></pre></div>
+<pre tabindex="0"><code>NtCreateFile(...); // 位于 ntoskrnl.exe，名字和 Ntdll 里的一样，但代码完全不同</code></pre><h3 id="visual-studio-调试fopen底层api">Visual Studio 调试fopen底层API<a class="anchor" href="#visual-studio-%e8%b0%83%e8%af%95fopen%e5%ba%95%e5%b1%82api">#</a></h3>
+<h4 id="配置-visual-studio-调试环境">配置 Visual Studio 调试环境<a class="anchor" href="#%e9%85%8d%e7%bd%ae-visual-studio-%e8%b0%83%e8%af%95%e7%8e%af%e5%a2%83">#</a></h4>
+<ol>
+<li>去掉勾选<strong>启用&quot;仅我的代码&quot;</strong></li>
+</ol>
+<p><img src="./index.assets/image-20260130145947361.png" alt="image-20260130145947361"  />
+</p>
+<ol start="2">
+<li>
+<p>启用符号服务器</p>
+<p>调试 (Debugging) -&gt; 符号 (Symbols) -&gt; 勾选 Microsoft 符号服务器 (Microsoft Symbol Servers) 。</p>
+<p><img src="./index.assets/image-20260130150143718.png" alt="image-20260130150143718"  />
+</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">#define _CRT_SECURE_NO_WARNINGS
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;stdio.h&gt;</span><span style="color:#ff79c6">
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>() {
+</span></span><span style="display:flex;"><span>    FILE<span style="color:#ff79c6">*</span> fp <span style="color:#ff79c6">=</span> fopen(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, <span style="color:#f1fa8c">&#34;w&#34;</span>); <span style="color:#6272a4">// 在这里下断点
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> (fp) fclose(fp);
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以配置断点快速确认：</p>
+<p><img src="./index.assets/image-20260130150323417.png" alt="image-20260130150323417"  />
+</p>
+<p><img src="./index.assets/image-20260130150252947.png" alt="image-20260130150252947"  />
+</p>
+</li>
+</ol>
+<p>Ring 0层VS就无法看到了</p>
+</div>
 </article>
  
       
@@ -503,6 +550,11 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
         <li><a href="#-跨越边界用户态-user-mode---内核态-kernel-mode-">====== 跨越边界：用户态 (User Mode) -&gt; 内核态 (Kernel Mode) ======</a></li>
         <li><a href="#第四层system-service-dispatcher-系统服务分发层">第四层：System Service Dispatcher (系统服务分发层)</a></li>
         <li><a href="#第五层kernel-executive-内核执行体层">第五层：Kernel Executive (内核执行体层)</a></li>
+        <li><a href="#visual-studio-调试fopen底层api">Visual Studio 调试fopen底层API</a>
+          <ul>
+            <li><a href="#配置-visual-studio-调试环境">配置 Visual Studio 调试环境</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
