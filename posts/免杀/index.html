@@ -19,8 +19,8 @@ https://github.com/alex-shpak/hugo-book
 
 
   <meta itemprop="name" content="免杀">
-  <meta itemprop="datePublished" content="2026-01-29T23:10:03+08:00">
-  <meta itemprop="dateModified" content="2026-01-29T23:10:03+08:00">
+  <meta itemprop="datePublished" content="2026-01-30T12:11:58+08:00">
+  <meta itemprop="dateModified" content="2026-01-30T12:11:58+08:00">
 
 <title>免杀 | Fivesix&#39;s blog</title>
 <link rel="icon" href="/favicon.png" >
@@ -30,7 +30,7 @@ https://github.com/alex-shpak/hugo-book
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.e1ebc750fc92d0dc44405c4f5b7c991c9fd75cf6a5a176b75a761ff6a4e97b3b.js" integrity="sha256-4evHUPyS0NxEQFxPW3yZHJ/XXPaloXa3WnYf9qTpezs=" crossorigin="anonymous"></script>
+  <script defer src="/zh.search.min.cb86e0996beae7704345e536226c0293f4c5298bd70b095138e7f4bd2c256a69.js" integrity="sha256-y4bgmWvq53BDReU2ImwCk/TFKYvXCwlROOf0vSwlamk=" crossorigin="anonymous"></script>
 
 
 <link rel="alternate" type="application/rss+xml" href="https://Fivesix567.github.io/posts/%E5%85%8D%E6%9D%80/index.xml" title="Fivesix's blog" />
@@ -96,6 +96,20 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/posts/2026/01/Windows-API-%E8%B0%83%E7%94%A8%E5%B1%82%E7%BA%A7/" class="">
+      Windows API 调用层级</a>
+  
+
+        </li>
+      
     
       
         <li>
@@ -338,6 +352,49 @@ https://github.com/alex-shpak/hugo-book
 
       
       
+  
+  <article class="book-post markdown">
+    <h2>
+      <a href="/posts/2026/01/Windows-API-%E8%B0%83%E7%94%A8%E5%B1%82%E7%BA%A7/">Windows API 调用层级</a>
+    </h2>
+    <div class="book-post-container flex gap">
+      <div>
+        
+  <div class="flex align-center text-small book-post-date">
+    <img src="/icons/calendar.svg" class="book-icon" alt="Calendar" />
+    <span>2026年01月30日</span>
+  </div>
+
+
+
+  
+
+  
+
+
+        <div class="book-post-content markdown-inner"><!-- 在这里开始写你的文章... -->
+<h3 id="第一层standard-library-标准库层">第一层：Standard Library (标准库层)<a class="anchor" href="#%e7%ac%ac%e4%b8%80%e5%b1%82standard-library-%e6%a0%87%e5%87%86%e5%ba%93%e5%b1%82">#</a></h3>
+<p>例如：C语言中的</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>    FILE<span style="color:#ff79c6">*</span> fp <span style="color:#ff79c6">=</span> fopen(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, <span style="color:#f1fa8c">&#34;w&#34;</span>); <span style="color:#6272a4">// 在这里下断点
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者java中的：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#ff79c6">new</span> FileOutputStream(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>);</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="第二层win32-api--windows-subsystem-子系统层">第二层：Win32 API / Windows Subsystem (子系统层)<a class="anchor" href="#%e7%ac%ac%e4%ba%8c%e5%b1%82win32-api--windows-subsystem-%e5%ad%90%e7%b3%bb%e7%bb%9f%e5%b1%82">#</a></h3>
+<p>这是微软官方提供给开发者的一套标准接口，通常位于 Kernel32.dll 、 …</p></div></div></div></div></!--></div>
+      </div></div>
+  </article>
   
   <article class="book-post markdown">
     <h2>
