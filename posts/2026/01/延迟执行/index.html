@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head>
   <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -11,9 +11,9 @@ https://github.com/alex-shpak/hugo-book
 <meta name="description" content=" Sleep()# 1 2 3 4 5 6 7 8 #include &lt;windows.h&gt; int main() { // 单位是毫秒 Sleep(5000); MessageBoxA(NULL, &#34;Hello!&#34;, &#34;Success&#34;, MB_OK); return 0; } WaitForSingleObject# 1 2 3 4 5 6 7 8 9 10 #include &lt;windows.h&gt; int main() { WaitForSingleObject(GetCurrentProcess(), 5000); MessageBoxA(NULL, &#34;5秒钟&#34;,&#34;test&#34;, MB_OK | MB_ICONINFORMATION); return 0; } IcmpSendEcho# 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 #include &lt;windows.h&gt; #include &lt;iphlpapi.h&gt; #include &lt;icmpapi.h&gt; #include &lt;iostream&gt; #pragma comment(lib, &#34;iphlpapi.lib&#34;) #pragma comment(lib, &#34;ws2_32.lib&#34;) int main() { HANDLE hIcmp = IcmpCreateFile(); // 构造一个不存在的 IP 地址 (例如 1.1.1.1) IPAddr targetIp = inet_addr(&#34;192.0.2.1&#34;); char sendData[] = &#34;test&#34;; LPVOID replyBuffer = (VOID*)malloc(sizeof(ICMP_ECHO_REPLY) &#43; sizeof(sendData)); // 设置超时时间为 5000 毫秒 IcmpSendEcho(hIcmp, targetIp, sendData, sizeof(sendData), NULL, replyBuffer, sizeof(ICMP_ECHO_REPLY) &#43; sizeof(sendData), 5000); std::cout &lt;&lt; &#34;5 seconds passed.&#34; &lt;&lt; std::endl; free(replyBuffer); IcmpCloseHandle(hIcmp); MessageBoxA(NULL, &#34;5 seconds passed.&#34;, &#34;Info&#34;, MB_OK); return 0; } Select (Socket 超时)# #include &lt;winsock2.h&gt; #include &lt;iostream&gt; #pragma comment(lib, &#34;ws2_32.lib&#34;) int main() { // 1. 初始化 WSADATA wsaData; WSAStartup(MAKEWORD(2, 2), &amp;wsaData); // 2. 创建一个占位 Socket SOCKET dummy = socket(AF_INET, SOCK_STREAM, 0); FD_SET readfds; FD_ZERO(&amp;readfds); FD_SET(dummy, &amp;readfds); // 3. 设置时间 TIMEVAL tv; tv.tv_sec = 5; tv.tv_usec = 0; // 4. 执行延时 select(0, &amp;readfds, NULL, NULL, &amp;tv); // 5. 清理 closesocket(dummy); WSACleanup(); std::cout &lt;&lt; &#34;[*] 5 seconds passed.&#34; &lt;&lt; std::endl; MessageBoxA(NULL, &#34;延时成功！&#34;, &#34;Test&#34;, MB_OK); return 0; }">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/posts/2026/01/Index/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://Fivesix567.github.io/posts/2026/01/%E5%BB%B6%E8%BF%9F%E6%89%A7%E8%A1%8C/">
   <meta property="og:site_name" content="Fivesix&#39;s blog">
-  <meta property="og:title" content="Index">
+  <meta property="og:title" content="延迟执行">
   <meta property="og:description" content="Sleep()# 1 2 3 4 5 6 7 8 #include &lt;windows.h&gt; int main() { // 单位是毫秒 Sleep(5000); MessageBoxA(NULL, &#34;Hello!&#34;, &#34;Success&#34;, MB_OK); return 0; } WaitForSingleObject# 1 2 3 4 5 6 7 8 9 10 #include &lt;windows.h&gt; int main() { WaitForSingleObject(GetCurrentProcess(), 5000); MessageBoxA(NULL, &#34;5秒钟&#34;,&#34;test&#34;, MB_OK | MB_ICONINFORMATION); return 0; } IcmpSendEcho# 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 #include &lt;windows.h&gt; #include &lt;iphlpapi.h&gt; #include &lt;icmpapi.h&gt; #include &lt;iostream&gt; #pragma comment(lib, &#34;iphlpapi.lib&#34;) #pragma comment(lib, &#34;ws2_32.lib&#34;) int main() { HANDLE hIcmp = IcmpCreateFile(); // 构造一个不存在的 IP 地址 (例如 1.1.1.1) IPAddr targetIp = inet_addr(&#34;192.0.2.1&#34;); char sendData[] = &#34;test&#34;; LPVOID replyBuffer = (VOID*)malloc(sizeof(ICMP_ECHO_REPLY) &#43; sizeof(sendData)); // 设置超时时间为 5000 毫秒 IcmpSendEcho(hIcmp, targetIp, sendData, sizeof(sendData), NULL, replyBuffer, sizeof(ICMP_ECHO_REPLY) &#43; sizeof(sendData), 5000); std::cout &lt;&lt; &#34;5 seconds passed.&#34; &lt;&lt; std::endl; free(replyBuffer); IcmpCloseHandle(hIcmp); MessageBoxA(NULL, &#34;5 seconds passed.&#34;, &#34;Info&#34;, MB_OK); return 0; } Select (Socket 超时)# #include &lt;winsock2.h&gt; #include &lt;iostream&gt; #pragma comment(lib, &#34;ws2_32.lib&#34;) int main() { // 1. 初始化 WSADATA wsaData; WSAStartup(MAKEWORD(2, 2), &amp;wsaData); // 2. 创建一个占位 Socket SOCKET dummy = socket(AF_INET, SOCK_STREAM, 0); FD_SET readfds; FD_ZERO(&amp;readfds); FD_SET(dummy, &amp;readfds); // 3. 设置时间 TIMEVAL tv; tv.tv_sec = 5; tv.tv_usec = 0; // 4. 执行延时 select(0, &amp;readfds, NULL, NULL, &amp;tv); // 5. 清理 closesocket(dummy); WSACleanup(); std::cout &lt;&lt; &#34;[*] 5 seconds passed.&#34; &lt;&lt; std::endl; MessageBoxA(NULL, &#34;延时成功！&#34;, &#34;Test&#34;, MB_OK); return 0; }">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
@@ -22,21 +22,21 @@ https://github.com/alex-shpak/hugo-book
     <meta property="article:modified_time" content="2026-01-31T11:43:25+08:00">
 
 
-  <meta itemprop="name" content="Index">
+  <meta itemprop="name" content="延迟执行">
   <meta itemprop="description" content="Sleep()# 1 2 3 4 5 6 7 8 #include &lt;windows.h&gt; int main() { // 单位是毫秒 Sleep(5000); MessageBoxA(NULL, &#34;Hello!&#34;, &#34;Success&#34;, MB_OK); return 0; } WaitForSingleObject# 1 2 3 4 5 6 7 8 9 10 #include &lt;windows.h&gt; int main() { WaitForSingleObject(GetCurrentProcess(), 5000); MessageBoxA(NULL, &#34;5秒钟&#34;,&#34;test&#34;, MB_OK | MB_ICONINFORMATION); return 0; } IcmpSendEcho# 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 #include &lt;windows.h&gt; #include &lt;iphlpapi.h&gt; #include &lt;icmpapi.h&gt; #include &lt;iostream&gt; #pragma comment(lib, &#34;iphlpapi.lib&#34;) #pragma comment(lib, &#34;ws2_32.lib&#34;) int main() { HANDLE hIcmp = IcmpCreateFile(); // 构造一个不存在的 IP 地址 (例如 1.1.1.1) IPAddr targetIp = inet_addr(&#34;192.0.2.1&#34;); char sendData[] = &#34;test&#34;; LPVOID replyBuffer = (VOID*)malloc(sizeof(ICMP_ECHO_REPLY) &#43; sizeof(sendData)); // 设置超时时间为 5000 毫秒 IcmpSendEcho(hIcmp, targetIp, sendData, sizeof(sendData), NULL, replyBuffer, sizeof(ICMP_ECHO_REPLY) &#43; sizeof(sendData), 5000); std::cout &lt;&lt; &#34;5 seconds passed.&#34; &lt;&lt; std::endl; free(replyBuffer); IcmpCloseHandle(hIcmp); MessageBoxA(NULL, &#34;5 seconds passed.&#34;, &#34;Info&#34;, MB_OK); return 0; } Select (Socket 超时)# #include &lt;winsock2.h&gt; #include &lt;iostream&gt; #pragma comment(lib, &#34;ws2_32.lib&#34;) int main() { // 1. 初始化 WSADATA wsaData; WSAStartup(MAKEWORD(2, 2), &amp;wsaData); // 2. 创建一个占位 Socket SOCKET dummy = socket(AF_INET, SOCK_STREAM, 0); FD_SET readfds; FD_ZERO(&amp;readfds); FD_SET(dummy, &amp;readfds); // 3. 设置时间 TIMEVAL tv; tv.tv_sec = 5; tv.tv_usec = 0; // 4. 执行延时 select(0, &amp;readfds, NULL, NULL, &amp;tv); // 5. 清理 closesocket(dummy); WSACleanup(); std::cout &lt;&lt; &#34;[*] 5 seconds passed.&#34; &lt;&lt; std::endl; MessageBoxA(NULL, &#34;延时成功！&#34;, &#34;Test&#34;, MB_OK); return 0; }">
   <meta itemprop="datePublished" content="2026-01-31T11:43:25+08:00">
   <meta itemprop="dateModified" content="2026-01-31T11:43:25+08:00">
   <meta itemprop="wordCount" content="308">
 
-<title>Index | Fivesix&#39;s blog</title>
+<title>延迟执行 | Fivesix&#39;s blog</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="http://localhost:1313/posts/2026/01/Index/">
+<link rel="canonical" href="https://Fivesix567.github.io/posts/2026/01/%E5%BB%B6%E8%BF%9F%E6%89%A7%E8%A1%8C/">
 <link rel="stylesheet" href="/book.min.d8f79ed853197a024be71c3620a88cc516c48531cb27487af5787b9fec2e1480.css" integrity="sha256-2Pee2FMZegJL5xw2IKiMxRbEhTHLJ0h69Xh7n&#43;wuFIA=" crossorigin="anonymous">
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.717227c22d782bec258a761106cb0eae6a6a7d5935d7ad2005404dc9c502ff7c.js" integrity="sha256-cXInwi14K&#43;wlinYRBssOrmpqfVk1160gBUBNycUC/3w=" crossorigin="anonymous"></script>
+  <script defer src="/zh.search.min.0df3e29ebaabe94f136f59710c9138663622d8e952f2452872a7712c4023d908.js" integrity="sha256-DfPinrqr6U8Tb1lxDJE4ZjYi2OlS8kUocqdxLEAj2Qg=" crossorigin="anonymous"></script>
 
 
 
@@ -127,8 +127,8 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/posts/2026/01/Index/" class="active">
-      Index</a>
+    <a href="/posts/2026/01/%E5%BB%B6%E8%BF%9F%E6%89%A7%E8%A1%8C/" class="active">
+      延迟执行</a>
   
 
         </li>
@@ -408,7 +408,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Index</h3>
+  <h3>延迟执行</h3>
 
   <label for="toc-control">
     
@@ -446,7 +446,7 @@ https://github.com/alex-shpak/hugo-book
       
 <article class="markdown book-post">
   <h1>
-    Index
+    延迟执行
   </h1>
   
   <div class="flex align-center text-small book-post-date">
