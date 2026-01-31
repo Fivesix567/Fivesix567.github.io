@@ -8,13 +8,13 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content=" Sleep()# 1 2 3 4 5 6 7 8 #include &lt;windows.h&gt; int main() { // 单位是毫秒 Sleep(5000); MessageBoxA(NULL, &#34;Hello!&#34;, &#34;Success&#34;, MB_OK); return 0; } WaitForSingleObject# 1 2 3 4 5 6 7 8 9 10 #include &lt;windows.h&gt; int main() { WaitForSingleObject(GetCurrentProcess(), 5000); MessageBoxA(NULL, &#34;5秒钟&#34;,&#34;test&#34;, MB_OK | MB_ICONINFORMATION); return 0; } IcmpSendEcho# 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 #include &lt;windows.h&gt; #include &lt;iphlpapi.h&gt; #include &lt;icmpapi.h&gt; #include &lt;iostream&gt; #pragma comment(lib, &#34;iphlpapi.lib&#34;) #pragma comment(lib, &#34;ws2_32.lib&#34;) int main() { HANDLE hIcmp = IcmpCreateFile(); // 构造一个不存在的 IP 地址 (例如 1.1.1.1) IPAddr targetIp = inet_addr(&#34;192.0.2.1&#34;); char sendData[] = &#34;test&#34;; LPVOID replyBuffer = (VOID*)malloc(sizeof(ICMP_ECHO_REPLY) &#43; sizeof(sendData)); // 设置超时时间为 5000 毫秒 IcmpSendEcho(hIcmp, targetIp, sendData, sizeof(sendData), NULL, replyBuffer, sizeof(ICMP_ECHO_REPLY) &#43; sizeof(sendData), 5000); std::cout &lt;&lt; &#34;5 seconds passed.&#34; &lt;&lt; std::endl; free(replyBuffer); IcmpCloseHandle(hIcmp); MessageBoxA(NULL, &#34;5 seconds passed.&#34;, &#34;Info&#34;, MB_OK); return 0; } Select (Socket 超时)# #include &lt;winsock2.h&gt; #include &lt;iostream&gt; #pragma comment(lib, &#34;ws2_32.lib&#34;) int main() { // 1. 初始化 WSADATA wsaData; WSAStartup(MAKEWORD(2, 2), &amp;wsaData); // 2. 创建一个占位 Socket SOCKET dummy = socket(AF_INET, SOCK_STREAM, 0); FD_SET readfds; FD_ZERO(&amp;readfds); FD_SET(dummy, &amp;readfds); // 3. 设置时间 TIMEVAL tv; tv.tv_sec = 5; tv.tv_usec = 0; // 4. 执行延时 select(0, &amp;readfds, NULL, NULL, &amp;tv); // 5. 清理 closesocket(dummy); WSACleanup(); std::cout &lt;&lt; &#34;[*] 5 seconds passed.&#34; &lt;&lt; std::endl; MessageBoxA(NULL, &#34;延时成功！&#34;, &#34;Test&#34;, MB_OK); return 0; }">
+<meta name="description" content=" Sleep()# 1 2 3 4 5 6 7 8 #include &lt;windows.h&gt; int main() { // 单位是毫秒 Sleep(5000); MessageBoxA(NULL, &#34;Hello!&#34;, &#34;Success&#34;, MB_OK); return 0; } WaitForSingleObject# 1 2 3 4 5 6 7 8 9 10 #include &lt;windows.h&gt; int main() { WaitForSingleObject(GetCurrentProcess(), 5000); MessageBoxA(NULL, &#34;5秒钟&#34;,&#34;test&#34;, MB_OK | MB_ICONINFORMATION); return 0; } IcmpSendEcho# 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 #include &lt;windows.h&gt; #include &lt;iphlpapi.h&gt; #include &lt;icmpapi.h&gt; #include &lt;iostream&gt; #pragma comment(lib, &#34;iphlpapi.lib&#34;) #pragma comment(lib, &#34;ws2_32.lib&#34;) int main() { HANDLE hIcmp = IcmpCreateFile(); // 构造一个不存在的 IP 地址 (例如 1.1.1.1) IPAddr targetIp = inet_addr(&#34;192.0.2.1&#34;); char sendData[] = &#34;test&#34;; LPVOID replyBuffer = (VOID*)malloc(sizeof(ICMP_ECHO_REPLY) &#43; sizeof(sendData)); // 设置超时时间为 5000 毫秒 IcmpSendEcho(hIcmp, targetIp, sendData, sizeof(sendData), NULL, replyBuffer, sizeof(ICMP_ECHO_REPLY) &#43; sizeof(sendData), 5000); std::cout &lt;&lt; &#34;5 seconds passed.&#34; &lt;&lt; std::endl; free(replyBuffer); IcmpCloseHandle(hIcmp); MessageBoxA(NULL, &#34;5 seconds passed.&#34;, &#34;Info&#34;, MB_OK); return 0; } Select (Socket 超时)# 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 #include &lt;winsock2.h&gt; #include &lt;iostream&gt; #pragma comment(lib, &#34;ws2_32.lib&#34;) int main() { // 1. 初始化 WSADATA wsaData; WSAStartup(MAKEWORD(2, 2), &amp;wsaData); // 2. 创建一个占位 Socket SOCKET dummy = socket(AF_INET, SOCK_STREAM, 0); FD_SET readfds; FD_ZERO(&amp;readfds); FD_SET(dummy, &amp;readfds); // 3. 设置时间 TIMEVAL tv; tv.tv_sec = 5; tv.tv_usec = 0; // 4. 执行延时 select(0, &amp;readfds, NULL, NULL, &amp;tv); // 5. 清理 closesocket(dummy); WSACleanup(); std::cout &lt;&lt; &#34;[*] 5 seconds passed.&#34; &lt;&lt; std::endl; MessageBoxA(NULL, &#34;延时成功！&#34;, &#34;Test&#34;, MB_OK); return 0; } ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://Fivesix567.github.io/posts/2026/01/%E5%BB%B6%E8%BF%9F%E6%89%A7%E8%A1%8C/">
   <meta property="og:site_name" content="Fivesix&#39;s blog">
   <meta property="og:title" content="延迟执行">
-  <meta property="og:description" content="Sleep()# 1 2 3 4 5 6 7 8 #include &lt;windows.h&gt; int main() { // 单位是毫秒 Sleep(5000); MessageBoxA(NULL, &#34;Hello!&#34;, &#34;Success&#34;, MB_OK); return 0; } WaitForSingleObject# 1 2 3 4 5 6 7 8 9 10 #include &lt;windows.h&gt; int main() { WaitForSingleObject(GetCurrentProcess(), 5000); MessageBoxA(NULL, &#34;5秒钟&#34;,&#34;test&#34;, MB_OK | MB_ICONINFORMATION); return 0; } IcmpSendEcho# 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 #include &lt;windows.h&gt; #include &lt;iphlpapi.h&gt; #include &lt;icmpapi.h&gt; #include &lt;iostream&gt; #pragma comment(lib, &#34;iphlpapi.lib&#34;) #pragma comment(lib, &#34;ws2_32.lib&#34;) int main() { HANDLE hIcmp = IcmpCreateFile(); // 构造一个不存在的 IP 地址 (例如 1.1.1.1) IPAddr targetIp = inet_addr(&#34;192.0.2.1&#34;); char sendData[] = &#34;test&#34;; LPVOID replyBuffer = (VOID*)malloc(sizeof(ICMP_ECHO_REPLY) &#43; sizeof(sendData)); // 设置超时时间为 5000 毫秒 IcmpSendEcho(hIcmp, targetIp, sendData, sizeof(sendData), NULL, replyBuffer, sizeof(ICMP_ECHO_REPLY) &#43; sizeof(sendData), 5000); std::cout &lt;&lt; &#34;5 seconds passed.&#34; &lt;&lt; std::endl; free(replyBuffer); IcmpCloseHandle(hIcmp); MessageBoxA(NULL, &#34;5 seconds passed.&#34;, &#34;Info&#34;, MB_OK); return 0; } Select (Socket 超时)# #include &lt;winsock2.h&gt; #include &lt;iostream&gt; #pragma comment(lib, &#34;ws2_32.lib&#34;) int main() { // 1. 初始化 WSADATA wsaData; WSAStartup(MAKEWORD(2, 2), &amp;wsaData); // 2. 创建一个占位 Socket SOCKET dummy = socket(AF_INET, SOCK_STREAM, 0); FD_SET readfds; FD_ZERO(&amp;readfds); FD_SET(dummy, &amp;readfds); // 3. 设置时间 TIMEVAL tv; tv.tv_sec = 5; tv.tv_usec = 0; // 4. 执行延时 select(0, &amp;readfds, NULL, NULL, &amp;tv); // 5. 清理 closesocket(dummy); WSACleanup(); std::cout &lt;&lt; &#34;[*] 5 seconds passed.&#34; &lt;&lt; std::endl; MessageBoxA(NULL, &#34;延时成功！&#34;, &#34;Test&#34;, MB_OK); return 0; }">
+  <meta property="og:description" content="Sleep()# 1 2 3 4 5 6 7 8 #include &lt;windows.h&gt; int main() { // 单位是毫秒 Sleep(5000); MessageBoxA(NULL, &#34;Hello!&#34;, &#34;Success&#34;, MB_OK); return 0; } WaitForSingleObject# 1 2 3 4 5 6 7 8 9 10 #include &lt;windows.h&gt; int main() { WaitForSingleObject(GetCurrentProcess(), 5000); MessageBoxA(NULL, &#34;5秒钟&#34;,&#34;test&#34;, MB_OK | MB_ICONINFORMATION); return 0; } IcmpSendEcho# 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 #include &lt;windows.h&gt; #include &lt;iphlpapi.h&gt; #include &lt;icmpapi.h&gt; #include &lt;iostream&gt; #pragma comment(lib, &#34;iphlpapi.lib&#34;) #pragma comment(lib, &#34;ws2_32.lib&#34;) int main() { HANDLE hIcmp = IcmpCreateFile(); // 构造一个不存在的 IP 地址 (例如 1.1.1.1) IPAddr targetIp = inet_addr(&#34;192.0.2.1&#34;); char sendData[] = &#34;test&#34;; LPVOID replyBuffer = (VOID*)malloc(sizeof(ICMP_ECHO_REPLY) &#43; sizeof(sendData)); // 设置超时时间为 5000 毫秒 IcmpSendEcho(hIcmp, targetIp, sendData, sizeof(sendData), NULL, replyBuffer, sizeof(ICMP_ECHO_REPLY) &#43; sizeof(sendData), 5000); std::cout &lt;&lt; &#34;5 seconds passed.&#34; &lt;&lt; std::endl; free(replyBuffer); IcmpCloseHandle(hIcmp); MessageBoxA(NULL, &#34;5 seconds passed.&#34;, &#34;Info&#34;, MB_OK); return 0; } Select (Socket 超时)# 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 #include &lt;winsock2.h&gt; #include &lt;iostream&gt; #pragma comment(lib, &#34;ws2_32.lib&#34;) int main() { // 1. 初始化 WSADATA wsaData; WSAStartup(MAKEWORD(2, 2), &amp;wsaData); // 2. 创建一个占位 Socket SOCKET dummy = socket(AF_INET, SOCK_STREAM, 0); FD_SET readfds; FD_ZERO(&amp;readfds); FD_SET(dummy, &amp;readfds); // 3. 设置时间 TIMEVAL tv; tv.tv_sec = 5; tv.tv_usec = 0; // 4. 执行延时 select(0, &amp;readfds, NULL, NULL, &amp;tv); // 5. 清理 closesocket(dummy); WSACleanup(); std::cout &lt;&lt; &#34;[*] 5 seconds passed.&#34; &lt;&lt; std::endl; MessageBoxA(NULL, &#34;延时成功！&#34;, &#34;Test&#34;, MB_OK); return 0; }">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -23,10 +23,10 @@ https://github.com/alex-shpak/hugo-book
 
 
   <meta itemprop="name" content="延迟执行">
-  <meta itemprop="description" content="Sleep()# 1 2 3 4 5 6 7 8 #include &lt;windows.h&gt; int main() { // 单位是毫秒 Sleep(5000); MessageBoxA(NULL, &#34;Hello!&#34;, &#34;Success&#34;, MB_OK); return 0; } WaitForSingleObject# 1 2 3 4 5 6 7 8 9 10 #include &lt;windows.h&gt; int main() { WaitForSingleObject(GetCurrentProcess(), 5000); MessageBoxA(NULL, &#34;5秒钟&#34;,&#34;test&#34;, MB_OK | MB_ICONINFORMATION); return 0; } IcmpSendEcho# 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 #include &lt;windows.h&gt; #include &lt;iphlpapi.h&gt; #include &lt;icmpapi.h&gt; #include &lt;iostream&gt; #pragma comment(lib, &#34;iphlpapi.lib&#34;) #pragma comment(lib, &#34;ws2_32.lib&#34;) int main() { HANDLE hIcmp = IcmpCreateFile(); // 构造一个不存在的 IP 地址 (例如 1.1.1.1) IPAddr targetIp = inet_addr(&#34;192.0.2.1&#34;); char sendData[] = &#34;test&#34;; LPVOID replyBuffer = (VOID*)malloc(sizeof(ICMP_ECHO_REPLY) &#43; sizeof(sendData)); // 设置超时时间为 5000 毫秒 IcmpSendEcho(hIcmp, targetIp, sendData, sizeof(sendData), NULL, replyBuffer, sizeof(ICMP_ECHO_REPLY) &#43; sizeof(sendData), 5000); std::cout &lt;&lt; &#34;5 seconds passed.&#34; &lt;&lt; std::endl; free(replyBuffer); IcmpCloseHandle(hIcmp); MessageBoxA(NULL, &#34;5 seconds passed.&#34;, &#34;Info&#34;, MB_OK); return 0; } Select (Socket 超时)# #include &lt;winsock2.h&gt; #include &lt;iostream&gt; #pragma comment(lib, &#34;ws2_32.lib&#34;) int main() { // 1. 初始化 WSADATA wsaData; WSAStartup(MAKEWORD(2, 2), &amp;wsaData); // 2. 创建一个占位 Socket SOCKET dummy = socket(AF_INET, SOCK_STREAM, 0); FD_SET readfds; FD_ZERO(&amp;readfds); FD_SET(dummy, &amp;readfds); // 3. 设置时间 TIMEVAL tv; tv.tv_sec = 5; tv.tv_usec = 0; // 4. 执行延时 select(0, &amp;readfds, NULL, NULL, &amp;tv); // 5. 清理 closesocket(dummy); WSACleanup(); std::cout &lt;&lt; &#34;[*] 5 seconds passed.&#34; &lt;&lt; std::endl; MessageBoxA(NULL, &#34;延时成功！&#34;, &#34;Test&#34;, MB_OK); return 0; }">
+  <meta itemprop="description" content="Sleep()# 1 2 3 4 5 6 7 8 #include &lt;windows.h&gt; int main() { // 单位是毫秒 Sleep(5000); MessageBoxA(NULL, &#34;Hello!&#34;, &#34;Success&#34;, MB_OK); return 0; } WaitForSingleObject# 1 2 3 4 5 6 7 8 9 10 #include &lt;windows.h&gt; int main() { WaitForSingleObject(GetCurrentProcess(), 5000); MessageBoxA(NULL, &#34;5秒钟&#34;,&#34;test&#34;, MB_OK | MB_ICONINFORMATION); return 0; } IcmpSendEcho# 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 #include &lt;windows.h&gt; #include &lt;iphlpapi.h&gt; #include &lt;icmpapi.h&gt; #include &lt;iostream&gt; #pragma comment(lib, &#34;iphlpapi.lib&#34;) #pragma comment(lib, &#34;ws2_32.lib&#34;) int main() { HANDLE hIcmp = IcmpCreateFile(); // 构造一个不存在的 IP 地址 (例如 1.1.1.1) IPAddr targetIp = inet_addr(&#34;192.0.2.1&#34;); char sendData[] = &#34;test&#34;; LPVOID replyBuffer = (VOID*)malloc(sizeof(ICMP_ECHO_REPLY) &#43; sizeof(sendData)); // 设置超时时间为 5000 毫秒 IcmpSendEcho(hIcmp, targetIp, sendData, sizeof(sendData), NULL, replyBuffer, sizeof(ICMP_ECHO_REPLY) &#43; sizeof(sendData), 5000); std::cout &lt;&lt; &#34;5 seconds passed.&#34; &lt;&lt; std::endl; free(replyBuffer); IcmpCloseHandle(hIcmp); MessageBoxA(NULL, &#34;5 seconds passed.&#34;, &#34;Info&#34;, MB_OK); return 0; } Select (Socket 超时)# 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 #include &lt;winsock2.h&gt; #include &lt;iostream&gt; #pragma comment(lib, &#34;ws2_32.lib&#34;) int main() { // 1. 初始化 WSADATA wsaData; WSAStartup(MAKEWORD(2, 2), &amp;wsaData); // 2. 创建一个占位 Socket SOCKET dummy = socket(AF_INET, SOCK_STREAM, 0); FD_SET readfds; FD_ZERO(&amp;readfds); FD_SET(dummy, &amp;readfds); // 3. 设置时间 TIMEVAL tv; tv.tv_sec = 5; tv.tv_usec = 0; // 4. 执行延时 select(0, &amp;readfds, NULL, NULL, &amp;tv); // 5. 清理 closesocket(dummy); WSACleanup(); std::cout &lt;&lt; &#34;[*] 5 seconds passed.&#34; &lt;&lt; std::endl; MessageBoxA(NULL, &#34;延时成功！&#34;, &#34;Test&#34;, MB_OK); return 0; }">
   <meta itemprop="datePublished" content="2026-01-31T11:43:25+08:00">
   <meta itemprop="dateModified" content="2026-01-31T11:43:25+08:00">
-  <meta itemprop="wordCount" content="308">
+  <meta itemprop="wordCount" content="342">
 
 <title>延迟执行 | Fivesix&#39;s blog</title>
 <link rel="icon" href="/favicon.png" >
@@ -36,7 +36,7 @@ https://github.com/alex-shpak/hugo-book
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.0df3e29ebaabe94f136f59710c9138663622d8e952f2452872a7712c4023d908.js" integrity="sha256-DfPinrqr6U8Tb1lxDJE4ZjYi2OlS8kUocqdxLEAj2Qg=" crossorigin="anonymous"></script>
+  <script defer src="/zh.search.min.3a413db1792b64b47dc4d60824ec3ccff2364b2b8e952582864df2d99d6e06e9.js" integrity="sha256-OkE9sXkrZLR9xNYIJOw8z/I2SyuOlSWChk3y2Z1uBuk=" crossorigin="anonymous"></script>
 
 
 
@@ -573,40 +573,80 @@ https://github.com/alex-shpak/hugo-book
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></td></tr></table>
 </div>
 </div><h3 id="select-socket-超时">Select (Socket 超时)<a class="anchor" href="#select-socket-%e8%b6%85%e6%97%b6">#</a></h3>
-<pre tabindex="0"><code>#include &lt;winsock2.h&gt; 
-#include &lt;iostream&gt; 
-
-#pragma comment(lib, &#34;ws2_32.lib&#34;) 
-
-int main() {
-    // 1. 初始化
-    WSADATA wsaData;
-    WSAStartup(MAKEWORD(2, 2), &amp;wsaData);
-
-    // 2. 创建一个占位 Socket
-    SOCKET dummy = socket(AF_INET, SOCK_STREAM, 0);
-
-    FD_SET readfds;
-    FD_ZERO(&amp;readfds);
-    FD_SET(dummy, &amp;readfds);
-
-    // 3. 设置时间
-    TIMEVAL tv;
-    tv.tv_sec = 5;
-    tv.tv_usec = 0;
-
-    // 4. 执行延时
-    select(0, &amp;readfds, NULL, NULL, &amp;tv);
-
-    // 5. 清理
-    closesocket(dummy);
-    WSACleanup();
-
-    std::cout &lt;&lt; &#34;[*] 5 seconds passed.&#34; &lt;&lt; std::endl;
-    MessageBoxA(NULL, &#34;延时成功！&#34;, &#34;Test&#34;, MB_OK);
-
-    return 0;
-}</code></pre></div>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">30
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">31
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">32
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">33
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">34
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;winsock2.h&gt;</span><span style="color:#ff79c6"> 
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;iostream&gt;</span><span style="color:#ff79c6"> 
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">#pragma comment(lib, &#34;ws2_32.lib&#34;) 
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 1. 初始化
+</span></span></span><span style="display:flex;"><span>    WSADATA wsaData;
+</span></span><span style="display:flex;"><span>    WSAStartup(MAKEWORD(<span style="color:#bd93f9">2</span>, <span style="color:#bd93f9">2</span>), <span style="color:#ff79c6">&amp;</span>wsaData);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 2. 创建一个占位 Socket
+</span></span></span><span style="display:flex;"><span>    SOCKET dummy <span style="color:#ff79c6">=</span> socket(AF_INET, SOCK_STREAM, <span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    FD_SET readfds;
+</span></span><span style="display:flex;"><span>    FD_ZERO(<span style="color:#ff79c6">&amp;</span>readfds);
+</span></span><span style="display:flex;"><span>    FD_SET(dummy, <span style="color:#ff79c6">&amp;</span>readfds);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 3. 设置时间
+</span></span></span><span style="display:flex;"><span>    TIMEVAL tv;
+</span></span><span style="display:flex;"><span>    tv.tv_sec <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">5</span>;
+</span></span><span style="display:flex;"><span>    tv.tv_usec <span style="color:#ff79c6">=</span> <span style="color:#bd93f9">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 4. 执行延时
+</span></span></span><span style="display:flex;"><span>    select(<span style="color:#bd93f9">0</span>, <span style="color:#ff79c6">&amp;</span>readfds, <span style="color:#8be9fd;font-style:italic">NULL</span>, <span style="color:#8be9fd;font-style:italic">NULL</span>, <span style="color:#ff79c6">&amp;</span>tv);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 5. 清理
+</span></span></span><span style="display:flex;"><span>    closesocket(dummy);
+</span></span><span style="display:flex;"><span>    WSACleanup();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    std<span style="color:#ff79c6">::</span>cout <span style="color:#ff79c6">&lt;&lt;</span> <span style="color:#f1fa8c">&#34;[*] 5 seconds passed.&#34;</span> <span style="color:#ff79c6">&lt;&lt;</span> std<span style="color:#ff79c6">::</span>endl;
+</span></span><span style="display:flex;"><span>    MessageBoxA(<span style="color:#8be9fd;font-style:italic">NULL</span>, <span style="color:#f1fa8c">&#34;延时成功！&#34;</span>, <span style="color:#f1fa8c">&#34;Test&#34;</span>, MB_OK);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></td></tr></table>
+</div>
+</div></div>
 </article>
  
       
