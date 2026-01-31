@@ -8,12 +8,13 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
+<meta name="description" content=" CMD# 1 2 net user admin 123456 /add net localgroup Administrators admin /add Powershell# 1 2 3 $Password = ConvertTo-SecureString &#34;P@ssw0rd123&#34; -AsPlainText -Force New-LocalUser -Name &#34;admin&#34; -Password $Password -Description &#34;Admin User&#34; Add-LocalGroupMember -Group &#34;Administrators&#34; -Member &#34;admin&#34; $computer = [ADSI]&#34;WinNT://$env:COMPUTERNAME&#34; $user = $computer.Create(&#34;User&#34;, &#34;test&#34;) $user.SetPassword(&#34;P@ssw0rd123&#34;) $user.SetInfo() $group = [ADSI]&#34;WinNT://$env:COMPUTERNAME/Administrators,group&#34; $group.Add($user.Path)Add-Type -AssemblyName System.DirectoryServices $computer = [ADSI]&#34;WinNT://localhost&#34; $user = $computer.Children.Add(&#34;admin&#34;, &#34;user&#34;) $user.Invoke(&#34;SetPassword&#34;, &#34;P@ssw0rd123&#34;) $user.CommitChanges() $group = [ADSI]&#34;WinNT://localhost/Administrators,group&#34; $group.Invoke(&#34;Add&#34;, $user.Path)C&#43;&#43;#">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://Fivesix567.github.io/posts/2026/01/Windows%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7/">
   <meta property="og:site_name" content="Fivesix&#39;s blog">
   <meta property="og:title" content="Windows添加用户">
+  <meta property="og:description" content="CMD# 1 2 net user admin 123456 /add net localgroup Administrators admin /add Powershell# 1 2 3 $Password = ConvertTo-SecureString &#34;P@ssw0rd123&#34; -AsPlainText -Force New-LocalUser -Name &#34;admin&#34; -Password $Password -Description &#34;Admin User&#34; Add-LocalGroupMember -Group &#34;Administrators&#34; -Member &#34;admin&#34; $computer = [ADSI]&#34;WinNT://$env:COMPUTERNAME&#34; $user = $computer.Create(&#34;User&#34;, &#34;test&#34;) $user.SetPassword(&#34;P@ssw0rd123&#34;) $user.SetInfo() $group = [ADSI]&#34;WinNT://$env:COMPUTERNAME/Administrators,group&#34; $group.Add($user.Path)Add-Type -AssemblyName System.DirectoryServices $computer = [ADSI]&#34;WinNT://localhost&#34; $user = $computer.Children.Add(&#34;admin&#34;, &#34;user&#34;) $user.Invoke(&#34;SetPassword&#34;, &#34;P@ssw0rd123&#34;) $user.CommitChanges() $group = [ADSI]&#34;WinNT://localhost/Administrators,group&#34; $group.Invoke(&#34;Add&#34;, $user.Path)C&#43;&#43;#">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -22,8 +23,10 @@ https://github.com/alex-shpak/hugo-book
 
 
   <meta itemprop="name" content="Windows添加用户">
+  <meta itemprop="description" content="CMD# 1 2 net user admin 123456 /add net localgroup Administrators admin /add Powershell# 1 2 3 $Password = ConvertTo-SecureString &#34;P@ssw0rd123&#34; -AsPlainText -Force New-LocalUser -Name &#34;admin&#34; -Password $Password -Description &#34;Admin User&#34; Add-LocalGroupMember -Group &#34;Administrators&#34; -Member &#34;admin&#34; $computer = [ADSI]&#34;WinNT://$env:COMPUTERNAME&#34; $user = $computer.Create(&#34;User&#34;, &#34;test&#34;) $user.SetPassword(&#34;P@ssw0rd123&#34;) $user.SetInfo() $group = [ADSI]&#34;WinNT://$env:COMPUTERNAME/Administrators,group&#34; $group.Add($user.Path)Add-Type -AssemblyName System.DirectoryServices $computer = [ADSI]&#34;WinNT://localhost&#34; $user = $computer.Children.Add(&#34;admin&#34;, &#34;user&#34;) $user.Invoke(&#34;SetPassword&#34;, &#34;P@ssw0rd123&#34;) $user.CommitChanges() $group = [ADSI]&#34;WinNT://localhost/Administrators,group&#34; $group.Invoke(&#34;Add&#34;, $user.Path)C&#43;&#43;#">
   <meta itemprop="datePublished" content="2026-01-31T11:10:44+08:00">
   <meta itemprop="dateModified" content="2026-01-31T11:10:44+08:00">
+  <meta itemprop="wordCount" content="66">
 
 <title>Windows添加用户 | Fivesix&#39;s blog</title>
 <link rel="icon" href="/favicon.png" >
@@ -33,7 +36,7 @@ https://github.com/alex-shpak/hugo-book
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.3a413db1792b64b47dc4d60824ec3ccff2364b2b8e952582864df2d99d6e06e9.js" integrity="sha256-OkE9sXkrZLR9xNYIJOw8z/I2SyuOlSWChk3y2Z1uBuk=" crossorigin="anonymous"></script>
+  <script defer src="/zh.search.min.df2c1b9b623fae87d3288c5bdb954d7bb7fa38829149fafd3a64337de328e5f5.js" integrity="sha256-3ywbm2I/rofTKIxb25VNe7f6OIKRSfr9OmQzfeMo5fU=" crossorigin="anonymous"></script>
 
 
 
@@ -409,10 +412,31 @@ https://github.com/alex-shpak/hugo-book
 
   <label for="toc-control">
     
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
   </label>
 </div>
 
 
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#cmd">CMD</a></li>
+        <li><a href="#powershell">Powershell</a></li>
+        <li><a href="#c">C++</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
   
  
       </header>
@@ -437,6 +461,42 @@ https://github.com/alex-shpak/hugo-book
 
 
   <div class="book-post-content markdown-inner"><!-- 在这里开始写你的文章... -->
+<h3 id="cmd">CMD<a class="anchor" href="#cmd">#</a></h3>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>net user admin 123456 /add
+</span></span><span style="display:flex;"><span>net localgroup Administrators admin /add</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="powershell">Powershell<a class="anchor" href="#powershell">#</a></h3>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$Password</span> = <span style="color:#8be9fd;font-style:italic">ConvertTo-SecureString</span> <span style="color:#f1fa8c">&#34;P@ssw0rd123&#34;</span> -AsPlainText -Force
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">New-LocalUser</span> -Name <span style="color:#f1fa8c">&#34;admin&#34;</span> -Password <span style="color:#8be9fd;font-style:italic">$Password</span> -Description <span style="color:#f1fa8c">&#34;Admin User&#34;</span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">Add-LocalGroupMember</span> -Group <span style="color:#f1fa8c">&#34;Administrators&#34;</span> -Member <span style="color:#f1fa8c">&#34;admin&#34;</span></span></span></code></pre></td></tr></table>
+</div>
+</div><pre tabindex="0"><code>$computer = [ADSI]&#34;WinNT://$env:COMPUTERNAME&#34;
+$user = $computer.Create(&#34;User&#34;, &#34;test&#34;)
+$user.SetPassword(&#34;P@ssw0rd123&#34;)
+$user.SetInfo()
+
+$group = [ADSI]&#34;WinNT://$env:COMPUTERNAME/Administrators,group&#34;
+$group.Add($user.Path)</code></pre><pre tabindex="0"><code>Add-Type -AssemblyName System.DirectoryServices
+$computer = [ADSI]&#34;WinNT://localhost&#34;
+$user = $computer.Children.Add(&#34;admin&#34;, &#34;user&#34;)
+$user.Invoke(&#34;SetPassword&#34;, &#34;P@ssw0rd123&#34;)
+$user.CommitChanges()
+
+$group = [ADSI]&#34;WinNT://localhost/Administrators,group&#34;
+$group.Invoke(&#34;Add&#34;, $user.Path)</code></pre><h3 id="c">C++<a class="anchor" href="#c">#</a></h3>
 </div>
 </article>
  
@@ -481,6 +541,27 @@ https://github.com/alex-shpak/hugo-book
     </div>
 
     
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#cmd">CMD</a></li>
+        <li><a href="#powershell">Powershell</a></li>
+        <li><a href="#c">C++</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
   
  
   </main>
