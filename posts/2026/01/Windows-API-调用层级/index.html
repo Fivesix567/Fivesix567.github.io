@@ -36,7 +36,7 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
 CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native API (原生 API 层)# Kernel32.dll 中的 CreateFile 经过一系列检查后，会调用更底层的函数。这个函数位于 Ntdll.dll 中：">
   <meta itemprop="datePublished" content="2026-01-30T12:11:58+08:00">
   <meta itemprop="dateModified" content="2026-01-30T12:11:58+08:00">
-  <meta itemprop="wordCount" content="602">
+  <meta itemprop="wordCount" content="604">
 
 <title>Windows API 调用层级 | Fivesix&#39;s blog</title>
 <link rel="icon" href="/favicon.png" >
@@ -46,7 +46,7 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.430af3f4ef1cc386ca5ee7fd4ee2b3251a97c19b9e525d54d4d314e6055e2c51.js" integrity="sha256-Qwrz9O8cw4bKXuf9TuKzJRqXwZueUl1U1NMU5gVeLFE=" crossorigin="anonymous"></script>
+  <script defer src="/zh.search.min.fcb90fac9f8a39f9af31b4de70a3856be00e7e4acabe498d8cb19ef86e6f00bf.js" integrity="sha256-/LkPrJ&#43;KOfmvMbTecKOFa&#43;AOfkrKvkmNjLGe&#43;G5vAL8=" crossorigin="anonymous"></script>
 
 
 
@@ -396,7 +396,7 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
             <li><a href="#配置-visual-studio-调试环境">配置 Visual Studio 调试环境</a></li>
           </ul>
         </li>
-        <li><a href="#在线查询网站">在线查询网站</a></li>
+        <li><a href="#底层在线查询网站">底层在线查询网站</a></li>
       </ul>
     </li>
   </ul>
@@ -506,14 +506,16 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
 </li>
 </ol>
 <p>Ring 0层VS就无法看到了</p>
-<h3 id="在线查询网站">在线查询网站<a class="anchor" href="#%e5%9c%a8%e7%ba%bf%e6%9f%a5%e8%af%a2%e7%bd%91%e7%ab%99">#</a></h3>
+<h3 id="底层在线查询网站">底层在线查询网站<a class="anchor" href="#%e5%ba%95%e5%b1%82%e5%9c%a8%e7%ba%bf%e6%9f%a5%e8%af%a2%e7%bd%91%e7%ab%99">#</a></h3>
 <ol>
 <li>ReactOS Documentation</li>
 </ol>
 <p>​		https://doxygen.reactos.org</p>
 <ol start="2">
-<li>Undocumented NT Internals
-<a href="https://undocumented.ntinternals.net">https://undocumented.ntinternals.net</a></li>
+<li>
+<p>Undocumented NT Internals</p>
+<p><a href="https://undocumented.ntinternals.net">https://undocumented.ntinternals.net</a></p>
+</li>
 </ol>
 </div>
 </article>
@@ -584,7 +586,7 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
             <li><a href="#配置-visual-studio-调试环境">配置 Visual Studio 调试环境</a></li>
           </ul>
         </li>
-        <li><a href="#在线查询网站">在线查询网站</a></li>
+        <li><a href="#底层在线查询网站">底层在线查询网站</a></li>
       </ul>
     </li>
   </ul>
