@@ -36,7 +36,7 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
 CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native API (原生 API 层)# Kernel32.dll 中的 CreateFile 经过一系列检查后，会调用更底层的函数。这个函数位于 Ntdll.dll 中：">
   <meta itemprop="datePublished" content="2026-01-30T12:11:58+08:00">
   <meta itemprop="dateModified" content="2026-01-30T12:11:58+08:00">
-  <meta itemprop="wordCount" content="587">
+  <meta itemprop="wordCount" content="602">
 
 <title>Windows API 调用层级 | Fivesix&#39;s blog</title>
 <link rel="icon" href="/favicon.png" >
@@ -46,7 +46,7 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.7a02fa0cf1854c4de09969098c8d3ea0a9304b343ac1dc0327ee74f5a767ca6a.js" integrity="sha256-egL6DPGFTE3gmWkJjI0&#43;oKkwSzQ6wdwDJ&#43;509adnymo=" crossorigin="anonymous"></script>
+  <script defer src="/zh.search.min.430af3f4ef1cc386ca5ee7fd4ee2b3251a97c19b9e525d54d4d314e6055e2c51.js" integrity="sha256-Qwrz9O8cw4bKXuf9TuKzJRqXwZueUl1U1NMU5gVeLFE=" crossorigin="anonymous"></script>
 
 
 
@@ -111,6 +111,20 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/posts/2026/01/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" class="">
+      PE文件结构</a>
+  
+
+        </li>
+      
     
       
         <li>
@@ -382,6 +396,7 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
             <li><a href="#配置-visual-studio-调试环境">配置 Visual Studio 调试环境</a></li>
           </ul>
         </li>
+        <li><a href="#在线查询网站">在线查询网站</a></li>
       </ul>
     </li>
   </ul>
@@ -491,6 +506,15 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
 </li>
 </ol>
 <p>Ring 0层VS就无法看到了</p>
+<h3 id="在线查询网站">在线查询网站<a class="anchor" href="#%e5%9c%a8%e7%ba%bf%e6%9f%a5%e8%af%a2%e7%bd%91%e7%ab%99">#</a></h3>
+<ol>
+<li>ReactOS Documentation</li>
+</ol>
+<p>​		https://doxygen.reactos.org</p>
+<ol start="2">
+<li>Undocumented NT Internals
+<a href="https://undocumented.ntinternals.net">https://undocumented.ntinternals.net</a></li>
+</ol>
 </div>
 </article>
  
@@ -500,6 +524,11 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
         
   <div class="flex flex-wrap justify-between">
   <div>
+  
+    <a href="/posts/2026/01/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" class="flex align-center">
+      <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+      <span>PE文件结构</span>
+    </a>
   
   </div>
   <div>
@@ -555,6 +584,7 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
             <li><a href="#配置-visual-studio-调试环境">配置 Visual Studio 调试环境</a></li>
           </ul>
         </li>
+        <li><a href="#在线查询网站">在线查询网站</a></li>
       </ul>
     </li>
   </ul>
