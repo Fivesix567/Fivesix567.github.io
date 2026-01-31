@@ -8,30 +8,30 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content=" CMD# 1 2 net user admin 123456 /add net localgroup Administrators admin /add Powershell# 1 2 3 $Password = ConvertTo-SecureString &#34;P@ssw0rd123&#34; -AsPlainText -Force New-LocalUser -Name &#34;admin&#34; -Password $Password -Description &#34;Admin User&#34; Add-LocalGroupMember -Group &#34;Administrators&#34; -Member &#34;admin&#34; 1 2 3 4 5 6 7 $computer = [ADSI]&#34;WinNT://$env:COMPUTERNAME&#34; $user = $computer.Create(&#34;User&#34;, &#34;test&#34;) $user.SetPassword(&#34;P@ssw0rd123&#34;) $user.SetInfo() $group = [ADSI]&#34;WinNT://$env:COMPUTERNAME/Administrators,group&#34; $group.Add($user.Path) 1 2 3 4 5 6 7 8 Add-Type -AssemblyName System.DirectoryServices $computer = [ADSI]&#34;WinNT://localhost&#34; $user = $computer.Children.Add(&#34;admin&#34;, &#34;user&#34;) $user.Invoke(&#34;SetPassword&#34;, &#34;P@ssw0rd123&#34;) $user.CommitChanges() $group = [ADSI]&#34;WinNT://localhost/Administrators,group&#34; $group.Invoke(&#34;Add&#34;, $user.Path) C&#43;&#43;# ">
+<meta name="description" content=" #pragma comment 指令# 1 2 3 4 5 6 7 #pragma comment(linker, &#34;/subsystem:\&#34;windows\&#34; /entry:\&#34;mainCRTStartup\&#34;&#34;) #include &lt;windows.h&gt; int main() { MessageBoxA(0, &#34;弹窗！&#34;, &#34;Test&#34;, 0); return 0; } ShowWindow# 1 2 3 4 5 6 7 8 9 10 11 #include &lt;windows.h&gt; int main() { // 获取控制台窗口句柄 HWND hWnd = GetConsoleWindow(); // 隐藏 ShowWindow(hWnd, SW_HIDE); MessageBoxA(0, &#34;弹窗！&#34;, &#34;Test&#34;, 0); return 0; } FreeConsole# 1 2 3 4 5 6 7 8 9 #include &lt;windows.h&gt; int main() { // 释放控制台资源 FreeConsole(); MessageBoxA(0, &#34;弹窗！&#34;, &#34;Test&#34;, 0); return 0; } ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://Fivesix567.github.io/posts/2026/01/Windows%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7/">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://Fivesix567.github.io/posts/2026/01/%E9%9A%90%E8%97%8F%E6%8E%A7%E5%88%B6%E5%8F%B0%E7%AA%97%E5%8F%A3/">
   <meta property="og:site_name" content="Fivesix&#39;s blog">
-  <meta property="og:title" content="Windows添加用户">
-  <meta property="og:description" content="CMD# 1 2 net user admin 123456 /add net localgroup Administrators admin /add Powershell# 1 2 3 $Password = ConvertTo-SecureString &#34;P@ssw0rd123&#34; -AsPlainText -Force New-LocalUser -Name &#34;admin&#34; -Password $Password -Description &#34;Admin User&#34; Add-LocalGroupMember -Group &#34;Administrators&#34; -Member &#34;admin&#34; 1 2 3 4 5 6 7 $computer = [ADSI]&#34;WinNT://$env:COMPUTERNAME&#34; $user = $computer.Create(&#34;User&#34;, &#34;test&#34;) $user.SetPassword(&#34;P@ssw0rd123&#34;) $user.SetInfo() $group = [ADSI]&#34;WinNT://$env:COMPUTERNAME/Administrators,group&#34; $group.Add($user.Path) 1 2 3 4 5 6 7 8 Add-Type -AssemblyName System.DirectoryServices $computer = [ADSI]&#34;WinNT://localhost&#34; $user = $computer.Children.Add(&#34;admin&#34;, &#34;user&#34;) $user.Invoke(&#34;SetPassword&#34;, &#34;P@ssw0rd123&#34;) $user.CommitChanges() $group = [ADSI]&#34;WinNT://localhost/Administrators,group&#34; $group.Invoke(&#34;Add&#34;, $user.Path) C&#43;&#43;#">
+  <meta property="og:title" content="隐藏控制台窗口">
+  <meta property="og:description" content="#pragma comment 指令# 1 2 3 4 5 6 7 #pragma comment(linker, &#34;/subsystem:\&#34;windows\&#34; /entry:\&#34;mainCRTStartup\&#34;&#34;) #include &lt;windows.h&gt; int main() { MessageBoxA(0, &#34;弹窗！&#34;, &#34;Test&#34;, 0); return 0; } ShowWindow# 1 2 3 4 5 6 7 8 9 10 11 #include &lt;windows.h&gt; int main() { // 获取控制台窗口句柄 HWND hWnd = GetConsoleWindow(); // 隐藏 ShowWindow(hWnd, SW_HIDE); MessageBoxA(0, &#34;弹窗！&#34;, &#34;Test&#34;, 0); return 0; } FreeConsole# 1 2 3 4 5 6 7 8 9 #include &lt;windows.h&gt; int main() { // 释放控制台资源 FreeConsole(); MessageBoxA(0, &#34;弹窗！&#34;, &#34;Test&#34;, 0); return 0; }">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
-    <meta property="article:published_time" content="2026-01-31T11:10:44+08:00">
-    <meta property="article:modified_time" content="2026-01-31T11:10:44+08:00">
+    <meta property="article:published_time" content="2026-01-31T23:24:32+08:00">
+    <meta property="article:modified_time" content="2026-01-31T23:24:32+08:00">
 
 
-  <meta itemprop="name" content="Windows添加用户">
-  <meta itemprop="description" content="CMD# 1 2 net user admin 123456 /add net localgroup Administrators admin /add Powershell# 1 2 3 $Password = ConvertTo-SecureString &#34;P@ssw0rd123&#34; -AsPlainText -Force New-LocalUser -Name &#34;admin&#34; -Password $Password -Description &#34;Admin User&#34; Add-LocalGroupMember -Group &#34;Administrators&#34; -Member &#34;admin&#34; 1 2 3 4 5 6 7 $computer = [ADSI]&#34;WinNT://$env:COMPUTERNAME&#34; $user = $computer.Create(&#34;User&#34;, &#34;test&#34;) $user.SetPassword(&#34;P@ssw0rd123&#34;) $user.SetInfo() $group = [ADSI]&#34;WinNT://$env:COMPUTERNAME/Administrators,group&#34; $group.Add($user.Path) 1 2 3 4 5 6 7 8 Add-Type -AssemblyName System.DirectoryServices $computer = [ADSI]&#34;WinNT://localhost&#34; $user = $computer.Children.Add(&#34;admin&#34;, &#34;user&#34;) $user.Invoke(&#34;SetPassword&#34;, &#34;P@ssw0rd123&#34;) $user.CommitChanges() $group = [ADSI]&#34;WinNT://localhost/Administrators,group&#34; $group.Invoke(&#34;Add&#34;, $user.Path) C&#43;&#43;#">
-  <meta itemprop="datePublished" content="2026-01-31T11:10:44+08:00">
-  <meta itemprop="dateModified" content="2026-01-31T11:10:44+08:00">
-  <meta itemprop="wordCount" content="83">
+  <meta itemprop="name" content="隐藏控制台窗口">
+  <meta itemprop="description" content="#pragma comment 指令# 1 2 3 4 5 6 7 #pragma comment(linker, &#34;/subsystem:\&#34;windows\&#34; /entry:\&#34;mainCRTStartup\&#34;&#34;) #include &lt;windows.h&gt; int main() { MessageBoxA(0, &#34;弹窗！&#34;, &#34;Test&#34;, 0); return 0; } ShowWindow# 1 2 3 4 5 6 7 8 9 10 11 #include &lt;windows.h&gt; int main() { // 获取控制台窗口句柄 HWND hWnd = GetConsoleWindow(); // 隐藏 ShowWindow(hWnd, SW_HIDE); MessageBoxA(0, &#34;弹窗！&#34;, &#34;Test&#34;, 0); return 0; } FreeConsole# 1 2 3 4 5 6 7 8 9 #include &lt;windows.h&gt; int main() { // 释放控制台资源 FreeConsole(); MessageBoxA(0, &#34;弹窗！&#34;, &#34;Test&#34;, 0); return 0; }">
+  <meta itemprop="datePublished" content="2026-01-31T23:24:32+08:00">
+  <meta itemprop="dateModified" content="2026-01-31T23:24:32+08:00">
+  <meta itemprop="wordCount" content="141">
 
-<title>Windows添加用户 | Fivesix&#39;s blog</title>
+<title>隐藏控制台窗口 | Fivesix&#39;s blog</title>
 <link rel="icon" href="/favicon.png" >
 <link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="https://Fivesix567.github.io/posts/2026/01/Windows%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7/">
+<link rel="canonical" href="https://Fivesix567.github.io/posts/2026/01/%E9%9A%90%E8%97%8F%E6%8E%A7%E5%88%B6%E5%8F%B0%E7%AA%97%E5%8F%A3/">
 <link rel="stylesheet" href="/book.min.d8f79ed853197a024be71c3620a88cc516c48531cb27487af5787b9fec2e1480.css" integrity="sha256-2Pee2FMZegJL5xw2IKiMxRbEhTHLJ0h69Xh7n&#43;wuFIA=" crossorigin="anonymous">
 
 
@@ -146,7 +146,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/posts/2026/01/%E9%9A%90%E8%97%8F%E6%8E%A7%E5%88%B6%E5%8F%B0%E7%AA%97%E5%8F%A3/" class="">
+    <a href="/posts/2026/01/%E9%9A%90%E8%97%8F%E6%8E%A7%E5%88%B6%E5%8F%B0%E7%AA%97%E5%8F%A3/" class="active">
       隐藏控制台窗口</a>
   
 
@@ -160,7 +160,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/posts/2026/01/Windows%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7/" class="active">
+    <a href="/posts/2026/01/Windows%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7/" class="">
       Windows添加用户</a>
   
 
@@ -422,7 +422,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <h3>Windows添加用户</h3>
+  <h3>隐藏控制台窗口</h3>
 
   <label for="toc-control">
     
@@ -440,9 +440,9 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li>
       <ul>
-        <li><a href="#cmd">CMD</a></li>
-        <li><a href="#powershell">Powershell</a></li>
-        <li><a href="#c">C++</a></li>
+        <li><a href="#pragma-comment-指令">#pragma comment 指令</a></li>
+        <li><a href="#showwindow">ShowWindow</a></li>
+        <li><a href="#freeconsole">FreeConsole</a></li>
       </ul>
     </li>
   </ul>
@@ -459,7 +459,7 @@ https://github.com/alex-shpak/hugo-book
       
 <article class="markdown book-post">
   <h1>
-    Windows添加用户
+    隐藏控制台窗口
   </h1>
   
   <div class="flex align-center text-small book-post-date">
@@ -475,29 +475,8 @@ https://github.com/alex-shpak/hugo-book
 
 
   <div class="book-post-content markdown-inner"><!-- 在这里开始写你的文章... -->
-<h3 id="cmd">CMD<a class="anchor" href="#cmd">#</a></h3>
+<h3 id="pragma-comment-指令">#pragma comment 指令<a class="anchor" href="#pragma-comment-%e6%8c%87%e4%bb%a4">#</a></h3>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-cmd" data-lang="cmd"><span style="display:flex;"><span>net user admin 123456 /add
-</span></span><span style="display:flex;"><span>net localgroup Administrators admin /add</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="powershell">Powershell<a class="anchor" href="#powershell">#</a></h3>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
-<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
-</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$Password</span> = <span style="color:#8be9fd;font-style:italic">ConvertTo-SecureString</span> <span style="color:#f1fa8c">&#34;P@ssw0rd123&#34;</span> -AsPlainText -Force
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">New-LocalUser</span> -Name <span style="color:#f1fa8c">&#34;admin&#34;</span> -Password <span style="color:#8be9fd;font-style:italic">$Password</span> -Description <span style="color:#f1fa8c">&#34;Admin User&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">Add-LocalGroupMember</span> -Group <span style="color:#f1fa8c">&#34;Administrators&#34;</span> -Member <span style="color:#f1fa8c">&#34;admin&#34;</span></span></span></code></pre></td></tr></table>
-</div>
-</div><div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
@@ -508,15 +487,44 @@ https://github.com/alex-shpak/hugo-book
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$computer</span> = [ADSI]<span style="color:#f1fa8c">&#34;WinNT://</span><span style="color:#8be9fd;font-style:italic">$env:COMPUTERNAME</span><span style="color:#f1fa8c">&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$user</span> = <span style="color:#8be9fd;font-style:italic">$computer</span>.Create(<span style="color:#f1fa8c">&#34;User&#34;</span>, <span style="color:#f1fa8c">&#34;test&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$user</span>.SetPassword(<span style="color:#f1fa8c">&#34;P@ssw0rd123&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$user</span>.SetInfo()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$group</span> = [ADSI]<span style="color:#f1fa8c">&#34;WinNT://</span><span style="color:#8be9fd;font-style:italic">$env:COMPUTERNAME</span><span style="color:#f1fa8c">/Administrators,group&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$group</span>.Add(<span style="color:#8be9fd;font-style:italic">$user</span>.Path)</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">#pragma comment(linker, &#34;/subsystem:\&#34;windows\&#34; /entry:\&#34;mainCRTStartup\&#34;&#34;)
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;windows.h&gt;</span><span style="color:#ff79c6">
+</span></span></span><span style="display:flex;"><span><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>() {
+</span></span><span style="display:flex;"><span>    MessageBoxA(<span style="color:#bd93f9">0</span>, <span style="color:#f1fa8c">&#34;弹窗！&#34;</span>, <span style="color:#f1fa8c">&#34;Test&#34;</span>, <span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></td></tr></table>
 </div>
-</div><div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
+</div><h3 id="showwindow">ShowWindow<a class="anchor" href="#showwindow">#</a></h3>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;windows.h&gt;</span><span style="color:#ff79c6">
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 获取控制台窗口句柄
+</span></span></span><span style="display:flex;"><span>    HWND hWnd <span style="color:#ff79c6">=</span> GetConsoleWindow();
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 隐藏
+</span></span></span><span style="display:flex;"><span>    ShowWindow(hWnd, SW_HIDE);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    MessageBoxA(<span style="color:#bd93f9">0</span>, <span style="color:#f1fa8c">&#34;弹窗！&#34;</span>, <span style="color:#f1fa8c">&#34;Test&#34;</span>, <span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="freeconsole">FreeConsole<a class="anchor" href="#freeconsole">#</a></h3>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
 <table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
@@ -526,19 +534,20 @@ https://github.com/alex-shpak/hugo-book
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
 </span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">9
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">Add-Type</span> -AssemblyName System.DirectoryServices
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$computer</span> = [ADSI]<span style="color:#f1fa8c">&#34;WinNT://localhost&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$user</span> = <span style="color:#8be9fd;font-style:italic">$computer</span>.Children.Add(<span style="color:#f1fa8c">&#34;admin&#34;</span>, <span style="color:#f1fa8c">&#34;user&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$user</span>.Invoke(<span style="color:#f1fa8c">&#34;SetPassword&#34;</span>, <span style="color:#f1fa8c">&#34;P@ssw0rd123&#34;</span>)
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$user</span>.CommitChanges()
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$group</span> = [ADSI]<span style="color:#f1fa8c">&#34;WinNT://localhost/Administrators,group&#34;</span>
-</span></span><span style="display:flex;"><span><span style="color:#8be9fd;font-style:italic">$group</span>.Invoke(<span style="color:#f1fa8c">&#34;Add&#34;</span>, <span style="color:#8be9fd;font-style:italic">$user</span>.Path)</span></span></code></pre></td></tr></table>
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;windows.h&gt;</span><span style="color:#ff79c6">
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#6272a4">// 释放控制台资源
+</span></span></span><span style="display:flex;"><span>    FreeConsole();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    MessageBoxA(<span style="color:#bd93f9">0</span>, <span style="color:#f1fa8c">&#34;弹窗！&#34;</span>, <span style="color:#f1fa8c">&#34;Test&#34;</span>, <span style="color:#bd93f9">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="c">C++<a class="anchor" href="#c">#</a></h3>
-<pre tabindex="0"><code></code></pre></div>
+</div></div>
 </article>
  
       
@@ -548,16 +557,11 @@ https://github.com/alex-shpak/hugo-book
   <div class="flex flex-wrap justify-between">
   <div>
   
-    <a href="/posts/2026/01/%E9%9A%90%E8%97%8F%E6%8E%A7%E5%88%B6%E5%8F%B0%E7%AA%97%E5%8F%A3/" class="flex align-center">
-      <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
-      <span>隐藏控制台窗口</span>
-    </a>
-  
   </div>
   <div>
   
-    <a href="/posts/2026/01/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/" class="flex align-center">
-      <span>PE文件结构</span>
+    <a href="/posts/2026/01/Windows%E6%B7%BB%E5%8A%A0%E7%94%A8%E6%88%B7/" class="flex align-center">
+      <span>Windows添加用户</span>
       <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
     </a>
   
@@ -596,9 +600,9 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li>
       <ul>
-        <li><a href="#cmd">CMD</a></li>
-        <li><a href="#powershell">Powershell</a></li>
-        <li><a href="#c">C++</a></li>
+        <li><a href="#pragma-comment-指令">#pragma comment 指令</a></li>
+        <li><a href="#showwindow">ShowWindow</a></li>
+        <li><a href="#freeconsole">FreeConsole</a></li>
       </ul>
     </li>
   </ul>
