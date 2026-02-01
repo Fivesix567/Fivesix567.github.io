@@ -27,7 +27,7 @@
       <link>https://Fivesix567.github.io/posts/2026/01/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/</link>
       <pubDate>Fri, 30 Jan 2026 16:06:28 +0800</pubDate>
       <guid>https://Fivesix567.github.io/posts/2026/01/PE%E6%96%87%E4%BB%B6%E7%BB%93%E6%9E%84/</guid>
-      <description>&lt;!-- 在这里开始写你的文章... --&gt;</description>
+      <description>&lt;!-- 在这里开始写你的文章... --&gt;&#xA;&lt;h1 id=&#34;pe&#34;&gt;PE&lt;a class=&#34;anchor&#34; href=&#34;#pe&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;p&gt;&lt;strong&gt;可移植性可执行文件&lt;/strong&gt;。&lt;/p&gt;&#xA;&lt;p&gt;PE (Portable Executable) 是 Windows 下的可执行文件格式（主要用于.exe, .dll, .sys）,主要使用在32位和64位的Windows操作系统。&lt;/p&gt;&#xA;&lt;pre tabindex=&#34;0&#34;&gt;&lt;code&gt;硬盘上的 .exe 文件          内存中的进程 (Virtual Memory)&#xA;+-----------------+        +-----------------+&#xA;| DOS Header      |   -&amp;gt;   | DOS Header      |&#xA;+-----------------+        +-----------------+&#xA;| NT Headers      |   -&amp;gt;   | NT Headers      |&#xA;+-----------------+        +-----------------+&#xA;| Section Table   |   -&amp;gt;   | Section Table   |&#xA;+-----------------+        +-----------------+&#xA;| .text (Code)    |   -&amp;gt;   | .text (Code)    |  &amp;lt;-- AddressOfEntryPoint 指向这&#xA;+-----------------+        |   (Alignment)   |  &amp;lt;-- 内存对齐产生的空隙&#xA;| .data (Vars)    |   -&amp;gt;   | .data (Vars)    |&#xA;+-----------------+        +-----------------+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;PE 结构自上而下分为 4 个核心部分 ：&lt;/p&gt;</description>
     </item>
     <item>
       <title>Windows API 调用层级</title>
