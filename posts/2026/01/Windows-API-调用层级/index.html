@@ -11,7 +11,7 @@ https://github.com/alex-shpak/hugo-book
 <meta name="description" content=" 第一层：Standard Library (标准库层)# 例如：C语言中的
 1 FILE* fp = fopen(&#34;test.txt&#34;, &#34;w&#34;); // 在这里下断点 或者java中的：
 1 new FileOutputStream(&#34;test.txt&#34;); 第二层：Win32 API / Windows Subsystem (子系统层)# 这是微软官方提供给开发者的一套标准接口，通常位于 Kernel32.dll 、 User32.dll 等 DLL 中。 当 fopen 在 Windows 上运行时，它最终会调用：
-CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native API (原生 API 层)# Kernel32.dll 中的 CreateFile 经过一系列检查后，会调用更底层的函数。这个函数位于 Ntdll.dll 中：
+1 CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll 第三层：Native API (原生 API 层)# Kernel32.dll 中的 CreateFile 经过一系列检查后，会调用更底层的函数。这个函数位于 Ntdll.dll 中：
 ">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
@@ -21,7 +21,7 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
   <meta property="og:description" content="第一层：Standard Library (标准库层)# 例如：C语言中的
 1 FILE* fp = fopen(&#34;test.txt&#34;, &#34;w&#34;); // 在这里下断点 或者java中的：
 1 new FileOutputStream(&#34;test.txt&#34;); 第二层：Win32 API / Windows Subsystem (子系统层)# 这是微软官方提供给开发者的一套标准接口，通常位于 Kernel32.dll 、 User32.dll 等 DLL 中。 当 fopen 在 Windows 上运行时，它最终会调用：
-CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native API (原生 API 层)# Kernel32.dll 中的 CreateFile 经过一系列检查后，会调用更底层的函数。这个函数位于 Ntdll.dll 中：">
+1 CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll 第三层：Native API (原生 API 层)# Kernel32.dll 中的 CreateFile 经过一系列检查后，会调用更底层的函数。这个函数位于 Ntdll.dll 中：">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -33,10 +33,10 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
   <meta itemprop="description" content="第一层：Standard Library (标准库层)# 例如：C语言中的
 1 FILE* fp = fopen(&#34;test.txt&#34;, &#34;w&#34;); // 在这里下断点 或者java中的：
 1 new FileOutputStream(&#34;test.txt&#34;); 第二层：Win32 API / Windows Subsystem (子系统层)# 这是微软官方提供给开发者的一套标准接口，通常位于 Kernel32.dll 、 User32.dll 等 DLL 中。 当 fopen 在 Windows 上运行时，它最终会调用：
-CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native API (原生 API 层)# Kernel32.dll 中的 CreateFile 经过一系列检查后，会调用更底层的函数。这个函数位于 Ntdll.dll 中：">
+1 CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll 第三层：Native API (原生 API 层)# Kernel32.dll 中的 CreateFile 经过一系列检查后，会调用更底层的函数。这个函数位于 Ntdll.dll 中：">
   <meta itemprop="datePublished" content="2026-01-30T12:11:58+08:00">
   <meta itemprop="dateModified" content="2026-01-30T12:11:58+08:00">
-  <meta itemprop="wordCount" content="606">
+  <meta itemprop="wordCount" content="599">
 
 <title>Windows API 调用层级 | Fivesix&#39;s blog</title>
 <link rel="icon" href="/favicon.png" >
@@ -46,7 +46,7 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.3dfdbf3cde400e15c7afee46244e400a4957b472d806894e86126819308e4f8b.js" integrity="sha256-Pf2/PN5ADhXHr&#43;5GJE5ACklXtHLYBolOhhJoGTCOT4s=" crossorigin="anonymous"></script>
+  <script defer src="/zh.search.min.410d1bd2a83acba0d0eec25baed91e6259d94351015a4855e7f174d1ed089563.js" integrity="sha256-QQ0b0qg6y6DQ7sJbrtkeYlnZQ1EBWkhV5/F00e0IlWM=" crossorigin="anonymous"></script>
 
 
 
@@ -603,10 +603,27 @@ CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll第三层：Native A
 </div><h3 id="第二层win32-api--windows-subsystem-子系统层">第二层：Win32 API / Windows Subsystem (子系统层)<a class="anchor" href="#%e7%ac%ac%e4%ba%8c%e5%b1%82win32-api--windows-subsystem-%e5%ad%90%e7%b3%bb%e7%bb%9f%e5%b1%82">#</a></h3>
 <p>这是微软官方提供给开发者的一套标准接口，通常位于 Kernel32.dll 、 User32.dll 等 DLL 中。
 当 fopen 在 Windows 上运行时，它最终会调用：</p>
-<pre tabindex="0"><code>CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll</code></pre><h3 id="第三层native-api-原生-api-层">第三层：Native API (原生 API 层)<a class="anchor" href="#%e7%ac%ac%e4%b8%89%e5%b1%82native-api-%e5%8e%9f%e7%94%9f-api-%e5%b1%82">#</a></h3>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#50fa7b">CreateFileA</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, ...); <span style="color:#6272a4">// 位于 Kernel32.dll
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="第三层native-api-原生-api-层">第三层：Native API (原生 API 层)<a class="anchor" href="#%e7%ac%ac%e4%b8%89%e5%b1%82native-api-%e5%8e%9f%e7%94%9f-api-%e5%b1%82">#</a></h3>
 <p>Kernel32.dll 中的 CreateFile 经过一系列检查后，会调用更底层的函数。这个函数位于 Ntdll.dll 中：</p>
-<pre tabindex="0"><code>NtCreateFile(...); 
-// 或者 ZwCreateFile</code></pre><p>NtCreateFile 的核心任务只有两件事：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>NtCreateFile(...); 
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 或者 ZwCreateFile
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>NtCreateFile 的核心任务只有两件事：</p>
 <ol>
 <li>把 系统调用号 (SSN) 放进 EAX 寄存器（例如 Win10 上可能是 0x55 ）。</li>
 <li>执行 syscall 指令（x64）或 sysenter 指令（x86）。</li>
