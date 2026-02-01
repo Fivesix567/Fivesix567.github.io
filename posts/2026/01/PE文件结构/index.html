@@ -33,7 +33,7 @@ PE (Portable Executable) 是 Windows 下的可执行文件格式（主要用于.
 硬盘上的 .exe 文件 内存中的进程 (Virtual Memory) &#43;-----------------&#43; &#43;-----------------&#43; | DOS Header | -&gt; | DOS Header | &#43;-----------------&#43; &#43;-----------------&#43; | NT Headers | -&gt; | NT Headers | &#43;-----------------&#43; &#43;-----------------&#43; | Section Table | -&gt; | Section Table | &#43;-----------------&#43; &#43;-----------------&#43; | .text (Code) | -&gt; | .text (Code) | &lt;-- AddressOfEntryPoint 指向这 &#43;-----------------&#43; | (Alignment) | &lt;-- 内存对齐产生的空隙 | .data (Vars) | -&gt; | .data (Vars) | &#43;-----------------&#43; &#43;-----------------&#43;PE 结构自上而下分为 4 个核心部分 ：">
   <meta itemprop="datePublished" content="2026-01-30T16:06:28+08:00">
   <meta itemprop="dateModified" content="2026-01-30T16:06:28+08:00">
-  <meta itemprop="wordCount" content="2407">
+  <meta itemprop="wordCount" content="2400">
 
 <title>PE文件结构 | Fivesix&#39;s blog</title>
 <link rel="icon" href="/favicon.png" >
@@ -43,7 +43,7 @@ PE (Portable Executable) 是 Windows 下的可执行文件格式（主要用于.
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.fd0287dedb69ae1319995d57438f66ad18d3837c9b5b8436534b7d8bf7114dce.js" integrity="sha256-/QKH3ttprhMZmV1XQ49mrRjTg3ybW4Q2U0t9i/cRTc4=" crossorigin="anonymous"></script>
+  <script defer src="/zh.search.min.3dfdbf3cde400e15c7afee46244e400a4957b472d806894e86126819308e4f8b.js" integrity="sha256-Pf2/PN5ADhXHr&#43;5GJE5ACklXtHLYBolOhhJoGTCOT4s=" crossorigin="anonymous"></script>
 
 
 
@@ -544,12 +544,12 @@ PE (Portable Executable) 是 Windows 下的可执行文件格式（主要用于.
         <li><a href="#nt-headers-结构-image_nt_headers">NT Headers 结构 (IMAGE_NT_HEADERS)</a></li>
       </ul>
     </li>
-    <li><a href="#节表-section-table-区段表">节表 (Section Table) (区段表)</a>
+    <li><a href="#节表-section-table-区段表区段头">节表 (Section Table) (区段表/区段头)</a>
       <ul>
         <li><a href="#结构体--image_section_header-">结构体 ( IMAGE_SECTION_HEADER )</a></li>
       </ul>
     </li>
-    <li><a href="#节数据-section-data">节数据 (Section Data)</a></li>
+    <li><a href="#节数据-section-data区段">节数据 (Section Data)(区段)</a></li>
   </ul>
 </nav>
 
@@ -787,7 +787,7 @@ PE (Portable Executable) 是 Windows 下的可执行文件格式（主要用于.
 </ul>
 <p><img src="./index.assets/image-20260201160740747.png" alt="image-20260201160740747"  />
 </p>
-<h2 id="节表-section-table-区段表">节表 (Section Table) (区段表)<a class="anchor" href="#%e8%8a%82%e8%a1%a8-section-table-%e5%8c%ba%e6%ae%b5%e8%a1%a8">#</a></h2>
+<h2 id="节表-section-table-区段表区段头">节表 (Section Table) (区段表/区段头)<a class="anchor" href="#%e8%8a%82%e8%a1%a8-section-table-%e5%8c%ba%e6%ae%b5%e8%a1%a8%e5%8c%ba%e6%ae%b5%e5%a4%b4">#</a></h2>
 <h3 id="结构体--image_section_header-">结构体 ( IMAGE_SECTION_HEADER )<a class="anchor" href="#%e7%bb%93%e6%9e%84%e4%bd%93--image_section_header-">#</a></h3>
 <pre tabindex="0"><code>typedef struct _IMAGE_SECTION_HEADER {
     BYTE  Name[8];              // [1] 节名 (如 &#34;.text&#34;, &#34;.data&#34;)
@@ -832,9 +832,7 @@ PE (Portable Executable) 是 Windows 下的可执行文件格式（主要用于.
 <li>0x40000000 (IMAGE_SCN_MEM_READ): 可读</li>
 <li>0x80000000 (IMAGE_SCN_MEM_WRITE): 可写 (数据段必须有)</li>
 </ul>
-<p><img src="./index.assets/image-20260201162226809.png" alt="image-20260201162226809"  />
-</p>
-<h2 id="节数据-section-data">节数据 (Section Data)<a class="anchor" href="#%e8%8a%82%e6%95%b0%e6%8d%ae-section-data">#</a></h2>
+<h2 id="节数据-section-data区段">节数据 (Section Data)(区段)<a class="anchor" href="#%e8%8a%82%e6%95%b0%e6%8d%ae-section-data%e5%8c%ba%e6%ae%b5">#</a></h2>
 <p>这是 PE 文件的主体部分，占用了 90% 以上的体积。它们按照节表的顺序依次排列。</p>
 <ul>
 <li>节表 (Section Table) ：是 元数据 (Metadata) 。它是一张清单，告诉系统有哪些节，每个节多大，放在哪里，有什么属性（可读/可写/可执行）。</li>
@@ -863,7 +861,9 @@ PE (Portable Executable) 是 Windows 下的可执行文件格式（主要用于.
 +-------------------+         |
 |  - .rsrc Data     | &lt;-------+
 |    (图标/菜单...)  |
-+-------------------+</code></pre><p>对于大多数普通的 EXE/DLL，最后一个节（通常是 .rsrc 或 .reloc ）的数据结束后，文件就到头了。</p>
++-------------------+</code></pre><p><img src="./index.assets/image-20260201163606333.png" alt="image-20260201163606333"  />
+</p>
+<p>对于大多数普通的 EXE/DLL，最后一个节（通常是 .rsrc 或 .reloc ）的数据结束后，文件就到头了。</p>
 </div>
 </article>
  
@@ -931,12 +931,12 @@ PE (Portable Executable) 是 Windows 下的可执行文件格式（主要用于.
         <li><a href="#nt-headers-结构-image_nt_headers">NT Headers 结构 (IMAGE_NT_HEADERS)</a></li>
       </ul>
     </li>
-    <li><a href="#节表-section-table-区段表">节表 (Section Table) (区段表)</a>
+    <li><a href="#节表-section-table-区段表区段头">节表 (Section Table) (区段表/区段头)</a>
       <ul>
         <li><a href="#结构体--image_section_header-">结构体 ( IMAGE_SECTION_HEADER )</a></li>
       </ul>
     </li>
-    <li><a href="#节数据-section-data">节数据 (Section Data)</a></li>
+    <li><a href="#节数据-section-data区段">节数据 (Section Data)(区段)</a></li>
   </ul>
 </nav>
 
