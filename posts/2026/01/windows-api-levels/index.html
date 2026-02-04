@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="zh-CN" dir="ltr">
+<head>
+  <!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content=" 第一层：Standard Library (标准库层)# 例如：C语言中的
+1 FILE* fp = fopen(&#34;test.txt&#34;, &#34;w&#34;); // 在这里下断点 或者java中的：
+1 new FileOutputStream(&#34;test.txt&#34;); 第二层：Win32 API / Windows Subsystem (子系统层)# 这是微软官方提供给开发者的一套标准接口，通常位于 Kernel32.dll 、 User32.dll 等 DLL 中。 当 fopen 在 Windows 上运行时，它最终会调用：
+1 CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll 第三层：Native API (原生 API 层)# Kernel32.dll 中的 CreateFile 经过一系列检查后，会调用更底层的函数。这个函数位于 Ntdll.dll 中：
+">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://Fivesix567.github.io/posts/2026/01/windows-api-levels/">
+  <meta property="og:site_name" content="Fivesix&#39;s blog">
+  <meta property="og:title" content="Windows API 调用层级">
+  <meta property="og:description" content="第一层：Standard Library (标准库层)# 例如：C语言中的
+1 FILE* fp = fopen(&#34;test.txt&#34;, &#34;w&#34;); // 在这里下断点 或者java中的：
+1 new FileOutputStream(&#34;test.txt&#34;); 第二层：Win32 API / Windows Subsystem (子系统层)# 这是微软官方提供给开发者的一套标准接口，通常位于 Kernel32.dll 、 User32.dll 等 DLL 中。 当 fopen 在 Windows 上运行时，它最终会调用：
+1 CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll 第三层：Native API (原生 API 层)# Kernel32.dll 中的 CreateFile 经过一系列检查后，会调用更底层的函数。这个函数位于 Ntdll.dll 中：">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2026-01-30T12:11:58+08:00">
+    <meta property="article:modified_time" content="2026-01-30T12:11:58+08:00">
+
+
+  <meta itemprop="name" content="Windows API 调用层级">
+  <meta itemprop="description" content="第一层：Standard Library (标准库层)# 例如：C语言中的
+1 FILE* fp = fopen(&#34;test.txt&#34;, &#34;w&#34;); // 在这里下断点 或者java中的：
+1 new FileOutputStream(&#34;test.txt&#34;); 第二层：Win32 API / Windows Subsystem (子系统层)# 这是微软官方提供给开发者的一套标准接口，通常位于 Kernel32.dll 、 User32.dll 等 DLL 中。 当 fopen 在 Windows 上运行时，它最终会调用：
+1 CreateFileA(&#34;test.txt&#34;, ...); // 位于 Kernel32.dll 第三层：Native API (原生 API 层)# Kernel32.dll 中的 CreateFile 经过一系列检查后，会调用更底层的函数。这个函数位于 Ntdll.dll 中：">
+  <meta itemprop="datePublished" content="2026-01-30T12:11:58+08:00">
+  <meta itemprop="dateModified" content="2026-01-30T12:11:58+08:00">
+  <meta itemprop="wordCount" content="599">
+
+<title>Windows API 调用层级 | Fivesix&#39;s blog</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="https://Fivesix567.github.io/posts/2026/01/windows-api-levels/">
+<link rel="stylesheet" href="/book.min.d8f79ed853197a024be71c3620a88cc516c48531cb27487af5787b9fec2e1480.css" integrity="sha256-2Pee2FMZegJL5xw2IKiMxRbEhTHLJ0h69Xh7n&#43;wuFIA=" crossorigin="anonymous">
+
+
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/zh.search.min.a0d58115332626557bf63784370e1a5bc09aba05ee7fa06aaf0e13dfa782e100.js" integrity="sha256-oNWBFTMmJlV79jeENw4aW8CaugXuf6Bqrw4T36eC4QA=" crossorigin="anonymous"></script>
+
+
+
+  
+</head>
+<body dir="ltr" class="book-kind-page book-type-posts">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    
+<aside class="book-menu">
+  <div class="book-menu-content">
+    
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>Fivesix&#39;s blog</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input id="book-search-input" type="text" 
+    placeholder="搜索"
+    aria-label="搜索"
+    maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+<ul><li><a href="/about/">关于我</a></li></ul>
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-2b813d7f3301d6d355367b0b6410c384" class="toggle"  />
+    <label for="section-2b813d7f3301d6d355367b0b6410c384" class="flex">
+      <a role="button" class="">
+        AI</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/posts/2026/01/ai-security/" class="">
+      AI 安全</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-cf794615c746a74a440cfd220c41d474" class="toggle" checked />
+    <label for="section-cf794615c746a74a440cfd220c41d474" class="flex">
+      <a role="button" class="">
+        免杀&amp;Tip</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d1941d8baf6acf73faccdcf1cc3380c7" class="toggle"  />
+    <label for="section-d1941d8baf6acf73faccdcf1cc3380c7" class="flex">
+      <a role="button" class="">
+        沙箱绕过</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/posts/2026/01/delay-execution/" class="">
+      延迟执行</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-3d116816f113e70938dfddc213a6cf23" class="toggle"  />
+    <label for="section-3d116816f113e70938dfddc213a6cf23" class="flex">
+      <a role="button" class="">
+        CobaltStrike</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/posts/2026/01/cs-dev/" class="">
+      Cobaltstrike二开</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/posts/2026/01/hide-console-window/" class="">
+      隐藏控制台窗口</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/posts/2026/01/windows-add-user/" class="">
+      Windows添加用户</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/posts/2026/01/pe-file-structure/" class="">
+      PE文件结构</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/posts/2026/01/windows-api-levels/" class="active">
+      Windows API 调用层级</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/posts/2026/01/apc-local-injection/" class="">
+      APCLocalInjection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/posts/2026/01/create-thread-injection/" class="">
+      CreateThreadInjection</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/posts/2026/01/local-process-injection/" class="">
+      LocalProcessInjection</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b0eac0bda1d9d6d5c075a4b42d2665a8" class="toggle"  />
+    <label for="section-b0eac0bda1d9d6d5c075a4b42d2665a8" class="flex">
+      <a role="button" class="">
+        WebSec</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0b2de9e9083e920768ff58d4cabf97d4" class="toggle"  />
+    <label for="section-0b2de9e9083e920768ff58d4cabf97d4" class="flex">
+      <a role="button" class="">
+        SQL 注入</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-56060fd95a1c74d77d0aa24143c8911f" class="toggle"  />
+    <label for="section-56060fd95a1c74d77d0aa24143c8911f" class="flex">
+      <a role="button" class="">
+        MySQL 注入</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/posts/2026/01/mysql-injection/" class="">
+      MySQL injection</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-cddfcc9f8964675d6681426d48e296a9" class="toggle"  />
+    <label for="section-cddfcc9f8964675d6681426d48e296a9" class="flex">
+      <a role="button" class="">
+        代码审计</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6557978e1f7e4b2d90a5b34a03924209" class="toggle"  />
+    <label for="section-6557978e1f7e4b2d90a5b34a03924209" class="flex">
+      <a role="button" class="">
+        java</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/posts/2026/01/java-sql-injection/" class="">
+      Sql注入</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b74825716f4fa919ae6770cc84777437" class="toggle"  />
+    <label for="section-b74825716f4fa919ae6770cc84777437" class="flex">
+      <a role="button" class="">
+        生活随笔</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/posts/2026/01/my-first-post/" class="">
+      My First Post</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+<ul><li><a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo 官网</a></li></ul>
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+
+  </div>
+</aside>
+ 
+
+    <div class="book-page">
+      <header class="book-header hidden">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/icons/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Windows API 调用层级</h3>
+
+  <label for="toc-control">
+    
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#第一层standard-library-标准库层">第一层：Standard Library (标准库层)</a></li>
+        <li><a href="#第二层win32-api--windows-subsystem-子系统层">第二层：Win32 API / Windows Subsystem (子系统层)</a></li>
+        <li><a href="#第三层native-api-原生-api-层">第三层：Native API (原生 API 层)</a></li>
+        <li><a href="#-跨越边界用户态-user-mode---内核态-kernel-mode-">====== 跨越边界：用户态 (User Mode) -&gt; 内核态 (Kernel Mode) ======</a></li>
+        <li><a href="#第四层system-service-dispatcher-系统服务分发层">第四层：System Service Dispatcher (系统服务分发层)</a></li>
+        <li><a href="#第五层kernel-executive-内核执行体层">第五层：Kernel Executive (内核执行体层)</a></li>
+        <li><a href="#visual-studio-调试fopen底层api">Visual Studio 调试fopen底层API</a>
+          <ul>
+            <li><a href="#配置-visual-studio-调试环境">配置 Visual Studio 调试环境</a></li>
+          </ul>
+        </li>
+        <li><a href="#底层函数在线查询网站">底层函数在线查询网站</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+<article class="markdown book-post">
+  <h1>
+    Windows API 调用层级
+  </h1>
+  
+  <div class="flex align-center text-small book-post-date">
+    <img src="/icons/calendar.svg" class="book-icon" alt="Calendar" />
+    <span>2026年01月30日</span>
+  </div>
+
+
+
+  
+
+  
+
+
+  <div class="book-post-content markdown-inner"><!-- 在这里开始写你的文章... -->
+<h3 id="第一层standard-library-标准库层">第一层：Standard Library (标准库层)<a class="anchor" href="#%e7%ac%ac%e4%b8%80%e5%b1%82standard-library-%e6%a0%87%e5%87%86%e5%ba%93%e5%b1%82">#</a></h3>
+<p>例如：C语言中的</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>    FILE<span style="color:#ff79c6">*</span> fp <span style="color:#ff79c6">=</span> fopen(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, <span style="color:#f1fa8c">&#34;w&#34;</span>); <span style="color:#6272a4">// 在这里下断点
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>或者java中的：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#ff79c6">new</span> FileOutputStream(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>);</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="第二层win32-api--windows-subsystem-子系统层">第二层：Win32 API / Windows Subsystem (子系统层)<a class="anchor" href="#%e7%ac%ac%e4%ba%8c%e5%b1%82win32-api--windows-subsystem-%e5%ad%90%e7%b3%bb%e7%bb%9f%e5%b1%82">#</a></h3>
+<p>这是微软官方提供给开发者的一套标准接口，通常位于 Kernel32.dll 、 User32.dll 等 DLL 中。
+当 fopen 在 Windows 上运行时，它最终会调用：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-c" data-lang="c"><span style="display:flex;"><span><span style="color:#50fa7b">CreateFileA</span>(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, ...); <span style="color:#6272a4">// 位于 Kernel32.dll
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="第三层native-api-原生-api-层">第三层：Native API (原生 API 层)<a class="anchor" href="#%e7%ac%ac%e4%b8%89%e5%b1%82native-api-%e5%8e%9f%e7%94%9f-api-%e5%b1%82">#</a></h3>
+<p>Kernel32.dll 中的 CreateFile 经过一系列检查后，会调用更底层的函数。这个函数位于 Ntdll.dll 中：</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>NtCreateFile(...); 
+</span></span><span style="display:flex;"><span><span style="color:#6272a4">// 或者 ZwCreateFile
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>NtCreateFile 的核心任务只有两件事：</p>
+<ol>
+<li>把 系统调用号 (SSN) 放进 EAX 寄存器（例如 Win10 上可能是 0x55 ）。</li>
+<li>执行 syscall 指令（x64）或 sysenter 指令（x86）。</li>
+</ol>
+<h3 id="-跨越边界用户态-user-mode---内核态-kernel-mode-">====== 跨越边界：用户态 (User Mode) -&gt; 内核态 (Kernel Mode) ======<a class="anchor" href="#-%e8%b7%a8%e8%b6%8a%e8%be%b9%e7%95%8c%e7%94%a8%e6%88%b7%e6%80%81-user-mode---%e5%86%85%e6%a0%b8%e6%80%81-kernel-mode-">#</a></h3>
+<p>执行 syscall 指令后，CPU 权限从 Ring 3 切换到 Ring 0。</p>
+<h3 id="第四层system-service-dispatcher-系统服务分发层">第四层：System Service Dispatcher (系统服务分发层)<a class="anchor" href="#%e7%ac%ac%e5%9b%9b%e5%b1%82system-service-dispatcher-%e7%b3%bb%e7%bb%9f%e6%9c%8d%e5%8a%a1%e5%88%86%e5%8f%91%e5%b1%82">#</a></h3>
+<p>CPU 切换到内核态后，会跳转到内核文件 ntoskrnl.exe 中的一个特定处理函数（通常是 KiSystemCall64 ）。它读取 EAX 中的号码（SSN），去查一张表—— SSDT (System Service Descriptor Table) ，根据号码找到对应的内核处理函数地址。</p>
+<h3 id="第五层kernel-executive-内核执行体层">第五层：Kernel Executive (内核执行体层)<a class="anchor" href="#%e7%ac%ac%e4%ba%94%e5%b1%82kernel-executive-%e5%86%85%e6%a0%b8%e6%89%a7%e8%a1%8c%e4%bd%93%e5%b1%82">#</a></h3>
+<p>SSDT 指向了真正的内核函数：</p>
+<pre tabindex="0"><code>NtCreateFile(...); // 位于 ntoskrnl.exe，名字和 Ntdll 里的一样，但代码完全不同</code></pre><h3 id="visual-studio-调试fopen底层api">Visual Studio 调试fopen底层API<a class="anchor" href="#visual-studio-%e8%b0%83%e8%af%95fopen%e5%ba%95%e5%b1%82api">#</a></h3>
+<h4 id="配置-visual-studio-调试环境">配置 Visual Studio 调试环境<a class="anchor" href="#%e9%85%8d%e7%bd%ae-visual-studio-%e8%b0%83%e8%af%95%e7%8e%af%e5%a2%83">#</a></h4>
+<ol>
+<li>去掉勾选<strong>启用&quot;仅我的代码&quot;</strong></li>
+</ol>
+<p><img src="./index.assets/image-20260130145947361.png" alt="image-20260130145947361"  />
+</p>
+<ol start="2">
+<li>
+<p>启用符号服务器</p>
+<p>调试 (Debugging) -&gt; 符号 (Symbols) -&gt; 勾选 Microsoft 符号服务器 (Microsoft Symbol Servers) 。</p>
+<p><img src="./index.assets/image-20260130150143718.png" alt="image-20260130150143718"  />
+</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">2
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">3
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">4
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">5
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">6
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">7
+</span><span style="white-space:pre;-webkit-user-select:none;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">8
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#f8f8f2;background-color:#282a36;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-text-size-adjust:none;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span><span style="color:#ff79c6">#define _CRT_SECURE_NO_WARNINGS
+</span></span></span><span style="display:flex;"><span><span style="color:#ff79c6">#include</span> <span style="color:#ff79c6">&lt;stdio.h&gt;</span><span style="color:#ff79c6">
+</span></span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#8be9fd">int</span> <span style="color:#50fa7b">main</span>() {
+</span></span><span style="display:flex;"><span>    FILE<span style="color:#ff79c6">*</span> fp <span style="color:#ff79c6">=</span> fopen(<span style="color:#f1fa8c">&#34;test.txt&#34;</span>, <span style="color:#f1fa8c">&#34;w&#34;</span>); <span style="color:#6272a4">// 在这里下断点
+</span></span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">if</span> (fp) fclose(fp);
+</span></span><span style="display:flex;"><span>    <span style="color:#ff79c6">return</span> <span style="color:#bd93f9">0</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></td></tr></table>
+</div>
+</div><p>可以配置断点快速确认：</p>
+<p><img src="./index.assets/image-20260130150323417.png" alt="image-20260130150323417"  />
+</p>
+<p><img src="./index.assets/image-20260130150252947.png" alt="image-20260130150252947"  />
+</p>
+</li>
+</ol>
+<p>Ring 0层VS就无法看到了</p>
+<h3 id="底层函数在线查询网站">底层函数在线查询网站<a class="anchor" href="#%e5%ba%95%e5%b1%82%e5%87%bd%e6%95%b0%e5%9c%a8%e7%ba%bf%e6%9f%a5%e8%af%a2%e7%bd%91%e7%ab%99">#</a></h3>
+<ol>
+<li>ReactOS Documentation</li>
+</ol>
+<p>​	https://doxygen.reactos.org</p>
+<ol start="2">
+<li>
+<p>Undocumented NT Internals</p>
+<p><a href="https://undocumented.ntinternals.net">https://undocumented.ntinternals.net</a></p>
+</li>
+</ol>
+</div>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+  <div>
+  
+    <a href="/posts/2026/01/pe-file-structure/" class="flex align-center">
+      <img src="/icons/backward.svg" class="book-icon" alt="Backward" />
+      <span>PE文件结构</span>
+    </a>
+  
+  </div>
+  <div>
+  
+    <a href="/posts/2026/01/apc-local-injection/" class="flex align-center">
+      <span>APCLocalInjection</span>
+      <img src="/icons/forward.svg" class="book-icon" alt="Forward" />
+    </a>
+  
+  </div>
+</div>
+ 
+        
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+        
+        
+  
+ 
+        
+  
+  
+    <script>(function(){document.querySelectorAll("pre:has(code)").forEach(e=>{e.addEventListener("click",e.focus),e.addEventListener("copy",function(t){if(t.preventDefault(),navigator.clipboard){const t=window.getSelection().toString()||e.textContent;navigator.clipboard.writeText(t)}})})})()</script>
+  
+
+      </footer>
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#第一层standard-library-标准库层">第一层：Standard Library (标准库层)</a></li>
+        <li><a href="#第二层win32-api--windows-subsystem-子系统层">第二层：Win32 API / Windows Subsystem (子系统层)</a></li>
+        <li><a href="#第三层native-api-原生-api-层">第三层：Native API (原生 API 层)</a></li>
+        <li><a href="#-跨越边界用户态-user-mode---内核态-kernel-mode-">====== 跨越边界：用户态 (User Mode) -&gt; 内核态 (Kernel Mode) ======</a></li>
+        <li><a href="#第四层system-service-dispatcher-系统服务分发层">第四层：System Service Dispatcher (系统服务分发层)</a></li>
+        <li><a href="#第五层kernel-executive-内核执行体层">第五层：Kernel Executive (内核执行体层)</a></li>
+        <li><a href="#visual-studio-调试fopen底层api">Visual Studio 调试fopen底层API</a>
+          <ul>
+            <li><a href="#配置-visual-studio-调试环境">配置 Visual Studio 调试环境</a></li>
+          </ul>
+        </li>
+        <li><a href="#底层函数在线查询网站">底层函数在线查询网站</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
+  
+ 
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
