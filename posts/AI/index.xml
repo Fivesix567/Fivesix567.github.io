@@ -2,18 +2,18 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>AI on Fivesix&#39;s blog</title>
-    <link>https://Fivesix567.github.io/posts/AI/</link>
+    <link>https://fivesix567.com/posts/AI/</link>
     <description>Recent content in AI on Fivesix&#39;s blog</description>
     <generator>Hugo</generator>
     <language>zh-CN</language>
     <copyright>© 2026 Fivesix567</copyright>
     <lastBuildDate>Sat, 31 Jan 2026 23:31:21 +0800</lastBuildDate>
-    <atom:link href="https://Fivesix567.github.io/posts/AI/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://fivesix567.com/posts/AI/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>AI 安全</title>
-      <link>https://Fivesix567.github.io/posts/2026/01/ai-security/</link>
+      <link>https://fivesix567.com/posts/2026/01/ai-security/</link>
       <pubDate>Sat, 31 Jan 2026 23:31:21 +0800</pubDate>
-      <guid>https://Fivesix567.github.io/posts/2026/01/ai-security/</guid>
+      <guid>https://fivesix567.com/posts/2026/01/ai-security/</guid>
       <description>&lt;!-- 在这里开始写你的文章... --&gt;</description>
     </item>
   </channel>
