@@ -8,12 +8,14 @@ https://github.com/alex-shpak/hugo-book
 
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
+<meta name="description" content="OWASP Top 10 for Large Language Model Applications# 1. 提示词注入(Prompt Injection)# 提示词注入类型# 1. 直接注入 直接提示注入是指用户的提示输入以非预期或意外的方式直接改变了模型的行为。输入可以是有意的（即恶意行为者故意设计提示以利用模型）或非意图的（即用户无意中输入触发意外行为）。 2. 间接注入 间接提示注入发生在LLM接受来自外部来源（如网站或文件）的输入时。外部内容中可能包含这些数据，当模型解释时，会以意想不到或意想不到的方式改变模型的行为。与直接注射类似，间接注射可以是有意的，也可以是无意的。 通常情况下，提示词注射可能导致意想不到的结果，包括但不限于：
+">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
 <meta name="color-scheme" content="light dark"><meta property="og:url" content="https://fivesix567.com/posts/2026/01/ai-security/">
   <meta property="og:site_name" content="Fivesix&#39;s blog">
   <meta property="og:title" content="AI 安全">
+  <meta property="og:description" content="OWASP Top 10 for Large Language Model Applications# 1. 提示词注入(Prompt Injection)# 提示词注入类型# 1. 直接注入 直接提示注入是指用户的提示输入以非预期或意外的方式直接改变了模型的行为。输入可以是有意的（即恶意行为者故意设计提示以利用模型）或非意图的（即用户无意中输入触发意外行为）。 2. 间接注入 间接提示注入发生在LLM接受来自外部来源（如网站或文件）的输入时。外部内容中可能包含这些数据，当模型解释时，会以意想不到或意想不到的方式改变模型的行为。与直接注射类似，间接注射可以是有意的，也可以是无意的。 通常情况下，提示词注射可能导致意想不到的结果，包括但不限于：">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="posts">
@@ -22,8 +24,10 @@ https://github.com/alex-shpak/hugo-book
 
 
   <meta itemprop="name" content="AI 安全">
+  <meta itemprop="description" content="OWASP Top 10 for Large Language Model Applications# 1. 提示词注入(Prompt Injection)# 提示词注入类型# 1. 直接注入 直接提示注入是指用户的提示输入以非预期或意外的方式直接改变了模型的行为。输入可以是有意的（即恶意行为者故意设计提示以利用模型）或非意图的（即用户无意中输入触发意外行为）。 2. 间接注入 间接提示注入发生在LLM接受来自外部来源（如网站或文件）的输入时。外部内容中可能包含这些数据，当模型解释时，会以意想不到或意想不到的方式改变模型的行为。与直接注射类似，间接注射可以是有意的，也可以是无意的。 通常情况下，提示词注射可能导致意想不到的结果，包括但不限于：">
   <meta itemprop="datePublished" content="2026-01-31T23:31:21+08:00">
   <meta itemprop="dateModified" content="2026-01-31T23:31:21+08:00">
+  <meta itemprop="wordCount" content="354">
 
 <title>AI 安全 | Fivesix&#39;s blog</title>
 <link rel="icon" href="/favicon.png" >
@@ -33,7 +37,7 @@ https://github.com/alex-shpak/hugo-book
 
 
   <script defer src="/fuse.min.js"></script>
-  <script defer src="/zh.search.min.a0d58115332626557bf63784370e1a5bc09aba05ee7fa06aaf0e13dfa782e100.js" integrity="sha256-oNWBFTMmJlV79jeENw4aW8CaugXuf6Bqrw4T36eC4QA=" crossorigin="anonymous"></script>
+  <script defer src="/zh.search.min.353f5300d814f6077b36e2c685f7305b89fe22c12ad4aa48fc3db4297d060a2e.js" integrity="sha256-NT9TANgU9gd7NuLGhfcwW4n&#43;IsEq1KpI/D20KX0GCi4=" crossorigin="anonymous"></script>
 
 
 
@@ -451,6 +455,52 @@ https://github.com/alex-shpak/hugo-book
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-65c46b83b54cbc65234eeff37075b437" class="toggle"  />
+    <label for="section-65c46b83b54cbc65234eeff37075b437" class="flex">
+      <a role="button" class="">
+        前端</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-bf3ba0f39bbbba6fc57d2b83a3f79004" class="toggle"  />
+    <label for="section-bf3ba0f39bbbba6fc57d2b83a3f79004" class="flex">
+      <a role="button" class="">
+        示例</a>
+      <img src="/icons/chevron-right.svg" class="book-icon" alt="Expand" />
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -534,10 +584,29 @@ https://github.com/alex-shpak/hugo-book
 
   <label for="toc-control">
     
+    <img src="/icons/toc.svg" class="book-icon" alt="Table of Contents" />
+    
   </label>
 </div>
 
 
+  
+  <aside class="hidden">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-提示词注入prompt-injection">1. 提示词注入(Prompt Injection)</a>
+      <ul>
+        <li><a href="#提示词注入类型">提示词注入类型</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
   
  
       </header>
@@ -561,7 +630,24 @@ https://github.com/alex-shpak/hugo-book
   
 
 
-  <div class="book-post-content markdown-inner"><!-- 在这里开始写你的文章... -->
+  <div class="book-post-content markdown-inner"><h1 id="owasp-top-10-for-large-language-model-applications">OWASP Top 10 for Large Language Model Applications<a class="anchor" href="#owasp-top-10-for-large-language-model-applications">#</a></h1>
+<h2 id="1-提示词注入prompt-injection">1. 提示词注入(Prompt Injection)<a class="anchor" href="#1-%e6%8f%90%e7%a4%ba%e8%af%8d%e6%b3%a8%e5%85%a5prompt-injection">#</a></h2>
+<h3 id="提示词注入类型">提示词注入类型<a class="anchor" href="#%e6%8f%90%e7%a4%ba%e8%af%8d%e6%b3%a8%e5%85%a5%e7%b1%bb%e5%9e%8b">#</a></h3>
+<pre><code>1. 直接注入
+    直接提示注入是指用户的提示输入以非预期或意外的方式直接改变了模型的行为。输入可以是有意的（即恶意行为者故意设计提示以利用模型）或非意图的（即用户无意中输入触发意外行为）。
+2. 间接注入
+    间接提示注入发生在LLM接受来自外部来源（如网站或文件）的输入时。外部内容中可能包含这些数据，当模型解释时，会以意想不到或意想不到的方式改变模型的行为。与直接注射类似，间接注射可以是有意的，也可以是无意的。
+</code></pre>
+<p>通常情况下，提示词注射可能导致意想不到的结果，包括但不限于：</p>
+<ul>
+<li>敏感信息的披露</li>
+<li>披露关于AI系统基础设施或系统提示的敏感信息</li>
+<li>内容作导致错误或有偏见的输出</li>
+<li>系统崩溃或拒绝服务</li>
+<li>向未授权方提供大语言模型（LLM）功能的访问权限</li>
+<li>在关联系统中执行任意命令</li>
+<li>操控关键决策流程</li>
+</ul>
 </div>
 </article>
  
@@ -605,6 +691,25 @@ https://github.com/alex-shpak/hugo-book
     </div>
 
     
+  
+  <aside class="book-toc">
+    <div class="book-toc-content">
+      
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-提示词注入prompt-injection">1. 提示词注入(Prompt Injection)</a>
+      <ul>
+        <li><a href="#提示词注入类型">提示词注入类型</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+    </div>
+  </aside>
   
  
   </main>

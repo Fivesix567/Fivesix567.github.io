@@ -14,7 +14,7 @@
       <link>https://fivesix567.com/posts/2026/01/ai-security/</link>
       <pubDate>Sat, 31 Jan 2026 23:31:21 +0800</pubDate>
       <guid>https://fivesix567.com/posts/2026/01/ai-security/</guid>
-      <description>&lt;!-- 在这里开始写你的文章... --&gt;</description>
+      <description>&lt;h1 id=&#34;owasp-top-10-for-large-language-model-applications&#34;&gt;OWASP Top 10 for Large Language Model Applications&lt;a class=&#34;anchor&#34; href=&#34;#owasp-top-10-for-large-language-model-applications&#34;&gt;#&lt;/a&gt;&lt;/h1&gt;&#xA;&lt;h2 id=&#34;1-提示词注入prompt-injection&#34;&gt;1. 提示词注入(Prompt Injection)&lt;a class=&#34;anchor&#34; href=&#34;#1-%e6%8f%90%e7%a4%ba%e8%af%8d%e6%b3%a8%e5%85%a5prompt-injection&#34;&gt;#&lt;/a&gt;&lt;/h2&gt;&#xA;&lt;h3 id=&#34;提示词注入类型&#34;&gt;提示词注入类型&lt;a class=&#34;anchor&#34; href=&#34;#%e6%8f%90%e7%a4%ba%e8%af%8d%e6%b3%a8%e5%85%a5%e7%b1%bb%e5%9e%8b&#34;&gt;#&lt;/a&gt;&lt;/h3&gt;&#xA;&lt;pre&gt;&lt;code&gt;1. 直接注入&#xA;    直接提示注入是指用户的提示输入以非预期或意外的方式直接改变了模型的行为。输入可以是有意的（即恶意行为者故意设计提示以利用模型）或非意图的（即用户无意中输入触发意外行为）。&#xA;2. 间接注入&#xA;    间接提示注入发生在LLM接受来自外部来源（如网站或文件）的输入时。外部内容中可能包含这些数据，当模型解释时，会以意想不到或意想不到的方式改变模型的行为。与直接注射类似，间接注射可以是有意的，也可以是无意的。&#xA;&lt;/code&gt;&lt;/pre&gt;&#xA;&lt;p&gt;通常情况下，提示词注射可能导致意想不到的结果，包括但不限于：&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>
